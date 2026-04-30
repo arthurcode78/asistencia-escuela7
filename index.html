@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Asistencia E7">
+<meta name="theme-color" content="#1a3a5c">
+<meta name="description" content="Registro de asistencia Escuela Secundaria N°7 Las Toninas">
+<link rel="manifest" href="manifest.json">
+<title>Asistencia — Escuela N°7</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f0f2f5;--surface:#ffffff;--surface2:#f7f8fa;
+  --primary:#1a3a5c;--primary-light:#e8eef5;--accent:#2563eb;
+  --green:#166534;--green-bg:#dcfce7;--red:#991b1b;--red-bg:#fee2e2;
+  --amber:#92400e;--amber-bg:#fef3c7;--text:#0f172a;--text2:#64748b;
+  --text3:#94a3b8;--border:#e2e8f0;--radius:12px;--radius-sm:8px;
+  --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+}
+html,body{height:100%;overflow:hidden}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+.header{background:var(--primary);padding:14px 16px 12px;flex-shrink:0}
+.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.header h1{font-size:18px;font-weight:600;color:#fff;letter-spacing:-0.3px}
+.header-sub{font-size:11px;color:rgba(255,255,255,0.6);margin-top:1px}
+.logo-badge{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:#fff;font-weight:500}
+.curso-tabs{display:flex;gap:6px;padding:0 0 2px}
+.curso-tab{flex:1;padding:8px 0;text-align:center;font-size:13px;font-weight:500;border-radius:var(--radius-sm);background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);cursor:pointer;transition:all 0.2s}
+.curso-tab.active{background:#fff;color:var(--primary)}
+.nav{display:flex;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.nav-btn{flex:1;padding:11px 0;text-align:center;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.fecha-bar{background:var(--surface);padding:10px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center}
+.fecha-bar label{font-size:13px;color:var(--text2);white-space:nowrap}
+.fecha-bar input[type=date]{flex:1;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;outline:none}
+.btn-guardar{background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn-guardar:active{opacity:0.8}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 16px}
+.stat-card{background:var(--surface);border-radius:var(--radius);padding:12px;text-align:center;box-shadow:var(--shadow)}
+.stat-num{font-size:26px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
+.stat-lbl{font-size:11px;color:var(--text2);margin-top:4px;font-weight:500}
+.stat-card.sp .stat-num{color:var(--green)}
+.stat-card.sa .stat-num{color:var(--red)}
+.stat-card.st .stat-num{color:var(--amber)}
+.lista-section{padding:0 16px 8px}
+.lista-hint{font-size:12px;color:var(--text3);margin-bottom:8px;padding-left:2px}
+.lista{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+.alumno-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;user-select:none}
+.alumno-row:last-child{border-bottom:none}
+.alumno-row:active{background:var(--surface2)}
+.a-num{width:22px;font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);text-align:right;flex-shrink:0}
+.a-nombre{flex:1;font-size:14px;color:var(--text);line-height:1.3}
+.a-badge{font-size:11px;font-weight:600;padding:4px 9px;border-radius:20px;flex-shrink:0;min-width:70px;text-align:center}
+.badge-p{background:var(--green-bg);color:var(--green)}
+.badge-a{background:var(--red-bg);color:var(--red)}
+.badge-t{background:var(--amber-bg);color:var(--amber)}
+.badge-nd{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
+.export-area{padding:12px 16px 24px;display:flex;gap:8px}
+.btn-export{flex:1;padding:11px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;text-align:center}
+.btn-export:active{background:var(--surface2)}
+.btn-export.csv{background:var(--green-bg);color:var(--green);border-color:var(--green)}
+.btn-export.txt{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
+.horario-section{padding:12px 16px 24px}
+.dia-card{background:var(--surface);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.dia-header{padding:10px 14px}
+.dia-nombre{font-size:14px;font-weight:600;color:#fff}
+.dia-body{padding:6px 0}
+.hora-row{display:flex;align-items:center;gap:10px;padding:8px 14px;border-bottom:1px solid var(--border)}
+.hora-row:last-child{border-bottom:none}
+.hora-num{width:20px;height:20px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--primary);flex-shrink:0}
+.hora-materia{font-size:13px;font-weight:500;color:var(--text)}
+.hora-prof{font-size:11px;color:var(--text2);margin-top:1px}
+.hist-section{padding:12px 16px 24px}
+.hist-filter{display:flex;gap:8px;margin-bottom:12px;align-items:center}
+.hist-filter select{flex:1;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px}
+.btn-borrar{padding:8px 14px;background:var(--red-bg);color:var(--red);border:1px solid var(--red);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer}
+.hist-card{background:var(--surface);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;box-shadow:var(--shadow)}
+.hist-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.hist-fecha{font-size:16px;font-weight:600;color:var(--text)}
+.hist-curso-lbl{font-size:12px;background:var(--primary-light);padding:3px 8px;border-radius:20px;color:var(--primary);font-weight:500}
+.hist-nums{display:flex;gap:12px;font-size:13px}
+.hn-p{color:var(--green);font-weight:600}
+.hn-a{color:var(--red);font-weight:600}
+.hn-t{color:var(--amber);font-weight:600}
+.hn-tot{color:var(--text2)}
+.hist-bar{margin-top:10px;height:4px;border-radius:2px;background:var(--border);overflow:hidden;display:flex}
+.bar-p{background:#16a34a;height:100%}
+.bar-a{background:#dc2626;height:100%}
+.bar-t{background:#d97706;height:100%}
+.empty-state{text-align:center;padding:48px 20px;color:var(--text3)}
+.empty-state p{font-size:14px;margin-top:8px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:flex-end;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px 32px;width:100%;max-width:500px;transform:translateY(100%);transition:transform 0.25s cubic-bezier(0.4,0,0.2,1)}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px}
+.modal-nombre{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
+.modal-subtxt{font-size:12px;color:var(--text2);margin-bottom:18px}
+.estado-opciones{display:flex;gap:8px;margin-bottom:14px}
+.est-btn{flex:1;padding:14px 8px;border-radius:var(--radius);border:2px solid var(--border);background:var(--surface2);cursor:pointer;text-align:center;transition:all 0.15s;font-family:'DM Sans',sans-serif}
+.est-btn .icon{font-size:22px;margin-bottom:4px}
+.est-btn .lbl{font-size:12px;font-weight:600;color:var(--text2)}
+.est-btn.sel-p{background:var(--green-bg);border-color:var(--green)}
+.est-btn.sel-p .lbl{color:var(--green)}
+.est-btn.sel-a{background:var(--red-bg);border-color:var(--red)}
+.est-btn.sel-a .lbl{color:var(--red)}
+.est-btn.sel-t{background:var(--amber-bg);border-color:var(--amber)}
+.est-btn.sel-t .lbl{color:var(--amber)}
+.obs-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:block}
+.obs-field{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;resize:none;outline:none;margin-bottom:14px}
+.obs-field:focus{border-color:var(--accent)}
+.modal-actions{display:flex;gap:8px}
+.btn-cancel{flex:1;padding:13px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer}
+.btn-confirm{flex:2;padding:13px;border-radius:var(--radius-sm);border:none;background:var(--accent);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer}
+.btn-confirm:active{opacity:0.85}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#0f172a;color:#fff;font-size:13px;font-weight:500;padding:10px 20px;border-radius:30px;z-index:300;transition:transform 0.3s;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.install-banner{background:#185FA5;color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-size:13px;flex-shrink:0}
+.install-banner button{background:#fff;color:#185FA5;border:none;border-radius:6px;padding:6px 12px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+</style>
+</head>
+<body>
+
+<div id="install-banner" class="install-banner" style="display:none">
+  <span>📲 Instalá la app en tu celular</span>
+  <button onclick="instalarApp()">Instalar</button>
+</div>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>Lista de asistencia</h1>
+      <div class="header-sub">Esc. Secundaria N°7 — Las Toninas</div>
+    </div>
+    <div class="logo-badge">E7</div>
+  </div>
+  <div class="curso-tabs">
+    <div class="curso-tab active" onclick="setCurso('4to3ra',this)">4to 3ra</div>
+    <div class="curso-tab" onclick="setCurso('5to3ra',this)">5to 3ra</div>
+  </div>
+</div>
+
+<div class="nav">
+  <div class="nav-btn active" onclick="setView('tomar',this)">Tomar lista</div>
+  <div class="nav-btn" onclick="setView('horario',this)">Horario</div>
+  <div class="nav-btn" onclick="setView('historial',this)">Historial</div>
+</div>
+
+<div class="scroll">
+  <div id="view-tomar">
+    <div class="fecha-bar">
+      <label>Fecha:</label>
+      <input type="date" id="sel-fecha" onchange="cargarFecha()">
+      <button class="btn-guardar" onclick="guardarLista()">Guardar</button>
+    </div>
+    <div class="stats">
+      <div class="stat-card sp"><div class="stat-num" id="cnt-p">0</div><div class="stat-lbl">Presentes</div></div>
+      <div class="stat-card sa"><div class="stat-num" id="cnt-a">0</div><div class="stat-lbl">Ausentes</div></div>
+      <div class="stat-card st"><div class="stat-num" id="cnt-t">0</div><div class="stat-lbl">Tardanzas</div></div>
+    </div>
+    <div class="lista-section">
+      <div class="lista-hint">Tocá un alumno para marcar su estado</div>
+      <div class="lista" id="lista-alumnos"></div>
+    </div>
+    <div class="export-area">
+      <button class="btn-export csv" onclick="exportarCSV()">Exportar Excel (.csv)</button>
+      <button class="btn-export txt" onclick="exportarTexto()">Exportar resumen</button>
+    </div>
+  </div>
+
+  <div id="view-horario" style="display:none">
+    <div class="horario-section" id="horario-contenido"></div>
+  </div>
+
+  <div id="view-historial" style="display:none">
+    <div class="hist-section">
+      <div class="hist-filter">
+        <select id="sel-hist-curso" onchange="renderHistorial()">
+          <option value="">Todos los cursos</option>
+          <option value="4to3ra">4to 3ra</option>
+          <option value="5to3ra">5to 3ra</option>
+        </select>
+        <button class="btn-borrar" onclick="limpiarHistorial()">Borrar todo</button>
+      </div>
+      <div id="hist-contenido"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="cerrarModalBg(event)">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-nombre" id="modal-nombre"></div>
+    <div class="modal-subtxt" id="modal-subtxt"></div>
+    <div class="estado-opciones">
+      <div class="est-btn" id="ebtn-p" onclick="selEstado('P')"><div class="icon">✓</div><div class="lbl">Presente</div></div>
+      <div class="est-btn" id="ebtn-a" onclick="selEstado('A')"><div class="icon">✗</div><div class="lbl">Ausente</div></div>
+      <div class="est-btn" id="ebtn-t" onclick="selEstado('T')"><div class="icon">⊙</div><div class="lbl">Tardanza</div></div>
+    </div>
+    <label class="obs-label">Observaciones (opcional)</label>
+    <textarea class="obs-field" id="modal-obs" rows="2" placeholder="Ej: presenta certificado médico..."></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
+      <button class="btn-confirm" onclick="confirmarModal()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const CURSOS = {
+  "4to3ra": {
+    nombre: "4to 3ra",
+    alumnos: [
+      "ACOSTA, Facundo","AGÜERO, Santino","AGUIRRE, Jazmin","ALMIRÓN, Valentín",
+      "ANDRADA, Maia","ARANDA, Uma","AVILA, Brian","CARDOZO, Isaias",
+      "CASTELLI, Matías","CUELLO, Soe","CUEVAS, Eithan","DIAZ, Thiago",
+      "GARCIA, Alejo","GIRADO, Lautaro","HERNAGA, Lautaro","IRALA, Axel",
+      "LAUDIA, Mia","LEZCANO, Selene","LOSSADA, Morella","NEICUN, Thiago",
+      "OBREGON, Tobias","PATIÑO, Lucas","PIRIZ, Joaquin","RAMOS PATIÑO, Alma",
+      "RIOS, Delfina","ROJAS, Franco","ROMERO, Luciano","RUIZ, Marcos",
+      "RUIZ DIAZ, Zaira","SEUTIN, Melany","TRIVELLINI, Alen","VERBEKE, Abril"
+    ],
+    horario: {
+      "Lunes": [
+        {m:"Ed. Física",p:"Sastre Mauro"},{m:"Literatura",p:"Hernan Cecilia"},
+        {m:"Literatura",p:"Hernan Cecilia"},{m:"Matemática",p:"Escobar Claudia"},
+        {m:"Matemática",p:"Escobar Claudia"}
+      ],
+      "Martes": [
+        {m:"SyA",p:"Aguirre Paola"},{m:"SyA",p:"Aguirre Paola"},
+        {m:"Ed. Física",p:"Sastre Mauro"},{m:"Int. a la Química",p:"Gorla Pablo"},
+        {m:"Int. a la Química",p:"Gorla Pablo"}
+      ],
+      "Miércoles": [
+        {m:"Int. a la Física",p:"Zapata Ana Laura"},{m:"Int. a la Física",p:"Zapata Ana Laura"},
+        {m:"Inglés",p:"Lencina Carolina"},{m:"Inglés",p:"Lencina Carolina"},
+        {m:"Matemática",p:"Escobar Claudia"}
+      ],
+      "Jueves": [
+        {m:"Literatura",p:"Hernan Cecilia"},{m:"Biología",p:"Gauchat Julio"},
+        {m:"Biología",p:"Gauchat Julio"},{m:"NTICX",p:"La Luz Julio"},
+        {m:"NTICX",p:"La Luz Julio"}
+      ],
+      "Viernes": [
+        {m:"Geografía",p:"Genazzini Olmos A."},{m:"Geografía",p:"Genazzini Olmos A."},
+        {m:"Historia",p:"Poropat Eric"},{m:"Historia",p:"Poropat Eric"},
+        {m:"—",p:""}
+      ]
+    }
+  },
+  "5to3ra": {
+    nombre: "5to 3ra",
+    alumnos: [
+      "ALMADA, Candela","CAMPOS, Jesus","CANETO, Thiago","CORDOBA, Nicolas",
+      "ESQUIVEL, Leandro Sebastian","FLORES, Agustin","FRETES PEDROZO, Axel Fernando",
+      "GOMEZ, Antonela","GUTIERREZ LUDMILA, Yasmin","GUY LUDMILA, Aramis",
+      "HERRERA, Juan Pablo","HERRERA, Leonel Agustin","IGLESIAS, Aixa",
+      "IGLESIAS AIXA, Delfina","LAURA, Braian","LEZCANO, Fiorella Agustina",
+      "MACARO PALACIO, Priscila","MELINAO, Guillermo Valentin",
+      "MONTENEGRO, Benjamin Abimael","MONTENEGRO, Nehemias Sebastian",
+      "OJEDA CANDIA, Luz Tamara","OSS, Tiziano Emiliano","PALLARES RAILEFF, Jazmin",
+      "POMBO, Alexis Gabriel","PORTIS, Priscila","PROCOPIO, Ariadna",
+      "SANCHEZ SAMANTHA, Melina"
+    ],
+    horario: {
+      "Lunes": [
+        {m:"Matemática",p:"Romero Alejandro"},{m:"Matemática",p:"Romero Alejandro"},
+        {m:"Inglés",p:"Lencina Carolina"},{m:"F. de la Química",p:"Azzolina Jorge"},
+        {m:"CDT",p:"Lourenzo Paulina"}
+      ],
+      "Martes": [
+        {m:"Arte",p:"Macia Paolone Candela"},{m:"Arte",p:"Macia Paolone Candela"},
+        {m:"Matemática",p:"Romero Alejandro"},{m:"F. de la Química",p:"Azzolina Jorge"},
+        {m:"F. de la Química",p:"Azzolina Jorge"}
+      ],
+      "Miércoles": [
+        {m:"Física",p:"Fernandez Silvana"},{m:"Física",p:"Fernandez Silvana"},
+        {m:"Historia",p:"Gonzalo Claudio"},{m:"Historia",p:"Gonzalo Claudio"},
+        {m:"Inglés",p:"Lencina Carolina"}
+      ],
+      "Jueves": [
+        {m:"Geografía",p:"Ortiz Julia"},{m:"Geografía",p:"Ortiz Julia"},
+        {m:"Biología",p:"Aguirre Paola"},{m:"Biología",p:"Aguirre Paola"},
+        {m:"Física",p:"Fernandez Silvana"}
+      ],
+      "Viernes": [
+        {m:"Literatura",p:"Lucas Silvia"},{m:"Literatura",p:"Lucas Silvia"},
+        {m:"CDT",p:"Lourenzo Paulina"},{m:"P. y Ciudadanía",p:"Ramirez Laudani S."},
+        {m:"P. y Ciudadanía",p:"Ramirez Laudani S."}
+      ]
+    }
+  }
+};
+
+const DIA_BG = {"Lunes":"#1a3a5c","Martes":"#1e4d8c","Miércoles":"#1a6b5a","Jueves":"#6b3a1a","Viernes":"#4a1a6b"};
+
+let cursoActual="4to3ra", estados={}, observaciones={}, modalIdx=null, modalEst=null, db={};
+let deferredPrompt = null;
+
+try { db = JSON.parse(localStorage.getItem('esec7_db')||'{}'); } catch(e) { db={}; }
+function saveDb(){ try{ localStorage.setItem('esec7_db',JSON.stringify(db)); }catch(e){} }
+function hoy(){ return new Date().toISOString().slice(0,10); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+
+// PWA install
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault(); deferredPrompt = e;
+  document.getElementById('install-banner').style.display = 'flex';
+});
+function instalarApp() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then(() => {
+    deferredPrompt = null;
+    document.getElementById('install-banner').style.display = 'none';
+  });
+}
+window.addEventListener('appinstalled', () => {
+  document.getElementById('install-banner').style.display = 'none';
+});
+
+// Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+
+function setCurso(c, el) {
+  cursoActual=c;
+  document.querySelectorAll('.curso-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  estados={}; observaciones={};
+  cargarFecha(); renderHorario();
+}
+
+function cargarFecha() {
+  const fecha=document.getElementById('sel-fecha').value;
+  const key=cursoActual+'_'+fecha;
+  if(db[key]){ estados={...db[key].estados}; observaciones={...(db[key].observaciones||{})}; }
+  else { estados={}; observaciones={}; }
+  renderLista();
+}
+
+function renderLista() {
+  const alumnos=CURSOS[cursoActual].alumnos;
+  document.getElementById('lista-alumnos').innerHTML = alumnos.map((n,i)=>{
+    const e=estados[i]||'';
+    const cls=e==='P'?'badge-p':e==='A'?'badge-a':e==='T'?'badge-t':'badge-nd';
+    const lbl=e==='P'?'Presente':e==='A'?'Ausente':e==='T'?'Tardanza':'Sin marcar';
+    return `<div class="alumno-row" onclick="abrirModal(${i})">
+      <div class="a-num">${i+1}</div>
+      <div class="a-nombre">${n}</div>
+      <div class="a-badge ${cls}">${lbl}</div>
+    </div>`;
+  }).join('');
+  actualizarStats();
+}
+
+function actualizarStats() {
+  const v=Object.values(estados);
+  document.getElementById('cnt-p').textContent=v.filter(x=>x==='P').length;
+  document.getElementById('cnt-a').textContent=v.filter(x=>x==='A').length;
+  document.getElementById('cnt-t').textContent=v.filter(x=>x==='T').length;
+}
+
+function renderHorario() {
+  const h=CURSOS[cursoActual].horario;
+  document.getElementById('horario-contenido').innerHTML = Object.entries(h).map(([dia,horas])=>`
+    <div class="dia-card">
+      <div class="dia-header" style="background:${DIA_BG[dia]||'#1a3a5c'}">
+        <div class="dia-nombre">${dia}</div>
+      </div>
+      <div class="dia-body">
+        ${horas.filter(h=>h.m&&h.m!=='—').map((h,i)=>`
+          <div class="hora-row">
+            <div class="hora-num">${i+1}</div>
+            <div>
+              <div class="hora-materia">${h.m}</div>
+              ${h.p?`<div class="hora-prof">${h.p}</div>`:''}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+function abrirModal(idx) {
+  modalIdx=idx; modalEst=estados[idx]||null;
+  document.getElementById('modal-nombre').textContent=CURSOS[cursoActual].alumnos[idx];
+  document.getElementById('modal-subtxt').textContent=CURSOS[cursoActual].nombre+' — '+(document.getElementById('sel-fecha').value.split('-').reverse().join('/'));
+  document.getElementById('modal-obs').value=observaciones[idx]||'';
+  actualizarEstBtns();
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function actualizarEstBtns() {
+  document.getElementById('ebtn-p').className='est-btn'+(modalEst==='P'?' sel-p':'');
+  document.getElementById('ebtn-a').className='est-btn'+(modalEst==='A'?' sel-a':'');
+  document.getElementById('ebtn-t').className='est-btn'+(modalEst==='T'?' sel-t':'');
+}
+
+function selEstado(e){ modalEst=modalEst===e?null:e; actualizarEstBtns(); }
+
+function confirmarModal() {
+  if(modalEst) estados[modalIdx]=modalEst; else delete estados[modalIdx];
+  const obs=document.getElementById('modal-obs').value.trim();
+  if(obs) observaciones[modalIdx]=obs; else delete observaciones[modalIdx];
+  cerrarModal(); renderLista();
+}
+
+function cerrarModal(){ document.getElementById('modal-overlay').classList.remove('open'); modalIdx=null; modalEst=null; }
+function cerrarModalBg(e){ if(e.target===document.getElementById('modal-overlay')) cerrarModal(); }
+
+function guardarLista() {
+  const fecha=document.getElementById('sel-fecha').value;
+  if(!fecha){ toast('Seleccioná una fecha primero'); return; }
+  db[cursoActual+'_'+fecha]={curso:cursoActual,fecha,estados:{...estados},observaciones:{...observaciones}};
+  saveDb(); toast('Lista guardada correctamente');
+}
+
+function setView(v, el) {
+  ['tomar','horario','historial'].forEach(id=>{ document.getElementById('view-'+id).style.display=v===id?'block':'none'; });
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  if(v==='historial') renderHistorial();
+  if(v==='horario') renderHorario();
+}
+
+function renderHistorial() {
+  const filtro=document.getElementById('sel-hist-curso').value;
+  const cont=document.getElementById('hist-contenido');
+  const filtrados=Object.keys(db).sort().reverse().filter(k=>!filtro||db[k].curso===filtro);
+  if(!filtrados.length){ cont.innerHTML='<div class="empty-state"><div style="font-size:40px">📋</div><p>No hay registros guardados aún</p></div>'; return; }
+  cont.innerHTML=filtrados.map(k=>{
+    const r=db[k], total=CURSOS[r.curso].alumnos.length;
+    const v=Object.values(r.estados);
+    const p=v.filter(x=>x==='P').length, a=v.filter(x=>x==='A').length, t=v.filter(x=>x==='T').length;
+    return `<div class="hist-card">
+      <div class="hist-top">
+        <div class="hist-fecha">${r.fecha.split('-').reverse().join('/')}</div>
+        <div class="hist-curso-lbl">${CURSOS[r.curso].nombre}</div>
+      </div>
+      <div class="hist-nums">
+        <span class="hn-p">P: ${p}</span><span class="hn-a">A: ${a}</span>
+        <span class="hn-t">T: ${t}</span><span class="hn-tot">/ ${total}</span>
+      </div>
+      <div class="hist-bar">
+        <div class="bar-p" style="width:${(p/total*100).toFixed(0)}%"></div>
+        <div class="bar-a" style="width:${(a/total*100).toFixed(0)}%"></div>
+        <div class="bar-t" style="width:${(t/total*100).toFixed(0)}%"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function limpiarHistorial() {
+  if(!confirm('¿Seguro que querés borrar todo el historial?')) return;
+  db={}; saveDb(); renderHistorial(); toast('Historial borrado');
+}
+
+function exportarCSV() {
+  const fecha=document.getElementById('sel-fecha').value;
+  if(!fecha){ toast('Seleccioná una fecha primero'); return; }
+  const alumnos=CURSOS[cursoActual].alumnos;
+  let csv='N\u00b0,Apellido y Nombre,Estado,Observaciones\n';
+  alumnos.forEach((n,i)=>{
+    const e=estados[i]||'';
+    const lbl=e==='P'?'Presente':e==='A'?'Ausente':e==='T'?'Tardanza':'Sin marcar';
+    csv+=`${i+1},"${n}","${lbl}","${(observaciones[i]||'').replace(/,/g,';')}"\n`;
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
+  a.download=`asistencia_${CURSOS[cursoActual].nombre.replace(/\s/g,'')}_${fecha}.csv`;
+  a.click(); toast('Archivo CSV descargado');
+}
+
+function exportarTexto() {
+  const fecha=document.getElementById('sel-fecha').value;
+  if(!fecha){ toast('Seleccioná una fecha primero'); return; }
+  const alumnos=CURSOS[cursoActual].alumnos;
+  const v=Object.values(estados);
+  let txt=`REGISTRO DE ASISTENCIA\nEscuela Secundaria N\u00b07 \u2014 Las Toninas\nCurso: ${CURSOS[cursoActual].nombre}    Fecha: ${fecha.split('-').reverse().join('/')}\n${'\u2500'.repeat(38)}\n`;
+  alumnos.forEach((n,i)=>{
+    const e=estados[i]||'';
+    txt+=`${String(i+1).padStart(2,'0')}. ${e==='P'?'[P]':e==='A'?'[A]':e==='T'?'[T]':'[ ]'} ${n}${observaciones[i]?'  ('+observaciones[i]+')':''}\n`;
+  });
+  txt+=`${'\u2500'.repeat(38)}\nPresentes: ${v.filter(x=>x==='P').length}  |  Ausentes: ${v.filter(x=>x==='A').length}  |  Tardanzas: ${v.filter(x=>x==='T').length}\nTotal: ${alumnos.length}\n`;
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));
+  a.download=`resumen_${CURSOS[cursoActual].nombre.replace(/\s/g,'')}_${fecha}.txt`;
+  a.click(); toast('Resumen descargado');
+}
+
+document.getElementById('sel-fecha').value=hoy();
+cargarFecha(); renderHorario();
+</script>
+</body>
+</html>
