@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Asistencia E7">
 <meta name="theme-color" content="#1a3a5c">
 <link rel="manifest" href="manifest.json">
@@ -14,12 +13,13 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#f0f2f5;--surface:#ffffff;--surface2:#f7f8fa;
+  --bg:#f0f2f5;--surface:#fff;--surface2:#f7f8fa;
   --primary:#1a3a5c;--primary-light:#e8eef5;--accent:#2563eb;
   --green:#166534;--green-bg:#dcfce7;--red:#991b1b;--red-bg:#fee2e2;
   --amber:#92400e;--amber-bg:#fef3c7;--text:#0f172a;--text2:#64748b;
   --text3:#94a3b8;--border:#e2e8f0;--radius:12px;--radius-sm:8px;
   --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --wa:#25D366;
 }
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
@@ -28,18 +28,17 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .header h1{font-size:18px;font-weight:600;color:#fff;letter-spacing:-0.3px}
 .header-sub{font-size:11px;color:rgba(255,255,255,0.6);margin-top:1px}
 .logo-badge{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:#fff;font-weight:500}
-.curso-tabs{display:flex;gap:6px;padding:0 0 2px}
-.curso-tab{flex:1;padding:8px 0;text-align:center;font-size:12px;font-weight:500;border-radius:var(--radius-sm);background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);cursor:pointer;transition:all 0.2s}
+.curso-tabs{display:flex;gap:5px;padding:0 0 2px}
+.curso-tab{flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:500;border-radius:var(--radius-sm);background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);cursor:pointer;transition:all 0.2s}
 .curso-tab.active{background:#fff;color:var(--primary)}
 .nav{display:flex;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
-.nav-btn{flex:1;padding:11px 0;text-align:center;font-size:12px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+.nav-btn{flex:1;padding:10px 0;text-align:center;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .fecha-bar{background:var(--surface);padding:10px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center}
 .fecha-bar label{font-size:13px;color:var(--text2);white-space:nowrap}
 .fecha-bar input[type=date]{flex:1;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;outline:none}
 .btn-guardar{background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
-.btn-guardar:active{opacity:0.8}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 16px}
 .stat-card{background:var(--surface);border-radius:var(--radius);padding:12px;text-align:center;box-shadow:var(--shadow)}
 .stat-num{font-size:26px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
@@ -48,7 +47,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .stat-card.sa .stat-num{color:var(--red)}
 .stat-card.st .stat-num{color:var(--amber)}
 .lista-section{padding:0 16px 8px}
-.lista-hint{font-size:12px;color:var(--text3);margin-bottom:8px;padding-left:2px}
+.lista-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.lista-hint{font-size:12px;color:var(--text3)}
+.btn-add-alumno{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--accent);background:var(--primary-light);border:none;border-radius:20px;padding:5px 12px;cursor:pointer}
 .lista{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
 .alumno-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;user-select:none}
 .alumno-row:last-child{border-bottom:none}
@@ -62,7 +63,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .badge-nd{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
 .export-area{padding:12px 16px 24px;display:flex;gap:8px}
 .btn-export{flex:1;padding:11px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;text-align:center}
-.btn-export:active{background:var(--surface2)}
 .btn-export.csv{background:var(--green-bg);color:var(--green);border-color:var(--green)}
 .btn-export.txt{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
 .horario-section{padding:12px 16px 24px}
@@ -75,6 +75,24 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .hora-num{width:20px;height:20px;border-radius:50%;background:var(--primary-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;color:var(--primary);flex-shrink:0}
 .hora-materia{font-size:13px;font-weight:500;color:var(--text)}
 .hora-prof{font-size:11px;color:var(--text2);margin-top:1px}
+
+/* AGENDA */
+.agenda-section{padding:12px 16px 24px}
+.agenda-search{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;outline:none;margin-bottom:12px}
+.agenda-search:focus{border-color:var(--accent)}
+.agenda-group-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.6px;margin:14px 0 8px 2px}
+.prof-card{background:var(--surface);border-radius:var(--radius);margin-bottom:8px;box-shadow:var(--shadow);overflow:hidden}
+.prof-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;gap:10px}
+.prof-info{flex:1;min-width:0}
+.prof-nombre{font-size:14px;font-weight:600;color:var(--text)}
+.prof-materia{font-size:12px;color:var(--text2);margin-top:2px}
+.prof-reemplazante{font-size:10px;font-weight:600;color:var(--amber);background:var(--amber-bg);padding:2px 7px;border-radius:10px;display:inline-block;margin-top:3px}
+.btn-wa{display:flex;align-items:center;gap:5px;background:var(--wa);color:#fff;border:none;border-radius:20px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.btn-wa:active{opacity:0.85}
+.btn-agregar-prof{display:flex;align-items:center;gap:6px;width:100%;padding:13px 14px;background:var(--surface);border:1.5px dashed var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;margin-top:4px}
+.prof-sin-numero{font-size:11px;color:var(--text3);white-space:nowrap}
+
+/* HISTORIAL */
 .hist-section{padding:12px 16px 24px}
 .hist-filter{display:flex;gap:8px;margin-bottom:12px;align-items:center}
 .hist-filter select{flex:1;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:8px 10px}
@@ -84,40 +102,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .hist-fecha{font-size:16px;font-weight:600;color:var(--text)}
 .hist-curso-lbl{font-size:12px;background:var(--primary-light);padding:3px 8px;border-radius:20px;color:var(--primary);font-weight:500}
 .hist-nums{display:flex;gap:12px;font-size:13px}
-.hn-p{color:var(--green);font-weight:600}
-.hn-a{color:var(--red);font-weight:600}
-.hn-t{color:var(--amber);font-weight:600}
-.hn-tot{color:var(--text2)}
+.hn-p{color:var(--green);font-weight:600}.hn-a{color:var(--red);font-weight:600}.hn-t{color:var(--amber);font-weight:600}.hn-tot{color:var(--text2)}
 .hist-bar{margin-top:10px;height:4px;border-radius:2px;background:var(--border);overflow:hidden;display:flex}
-.bar-p{background:#16a34a;height:100%}
-.bar-a{background:#dc2626;height:100%}
-.bar-t{background:#d97706;height:100%}
+.bar-p{background:#16a34a;height:100%}.bar-a{background:#dc2626;height:100%}.bar-t{background:#d97706;height:100%}
 .empty-state{text-align:center;padding:48px 20px;color:var(--text3)}
 .empty-state p{font-size:14px;margin-top:8px}
+
+/* MODALES */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:flex-end;justify-content:center;z-index:200;opacity:0;pointer-events:none;transition:opacity 0.2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
 .modal{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 20px 32px;width:100%;max-width:500px;transform:translateY(100%);transition:transform 0.25s cubic-bezier(0.4,0,0.2,1)}
 .modal-overlay.open .modal{transform:translateY(0)}
 .modal-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px}
+.modal-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:14px}
 .modal-nombre{font-size:16px;font-weight:600;color:var(--text);margin-bottom:4px}
 .modal-subtxt{font-size:12px;color:var(--text2);margin-bottom:18px}
 .estado-opciones{display:flex;gap:8px;margin-bottom:14px}
 .est-btn{flex:1;padding:14px 8px;border-radius:var(--radius);border:2px solid var(--border);background:var(--surface2);cursor:pointer;text-align:center;transition:all 0.15s;font-family:'DM Sans',sans-serif}
 .est-btn .icon{font-size:22px;margin-bottom:4px}
 .est-btn .lbl{font-size:12px;font-weight:600;color:var(--text2)}
-.est-btn.sel-p{background:var(--green-bg);border-color:var(--green)}
-.est-btn.sel-p .lbl{color:var(--green)}
-.est-btn.sel-a{background:var(--red-bg);border-color:var(--red)}
-.est-btn.sel-a .lbl{color:var(--red)}
-.est-btn.sel-t{background:var(--amber-bg);border-color:var(--amber)}
-.est-btn.sel-t .lbl{color:var(--amber)}
+.est-btn.sel-p{background:var(--green-bg);border-color:var(--green)}.est-btn.sel-p .lbl{color:var(--green)}
+.est-btn.sel-a{background:var(--red-bg);border-color:var(--red)}.est-btn.sel-a .lbl{color:var(--red)}
+.est-btn.sel-t{background:var(--amber-bg);border-color:var(--amber)}.est-btn.sel-t .lbl{color:var(--amber)}
 .obs-label{font-size:12px;color:var(--text2);margin-bottom:6px;display:block}
-.obs-field{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;resize:none;outline:none;margin-bottom:14px}
-.obs-field:focus{border-color:var(--accent)}
+.form-field{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;outline:none;margin-bottom:12px}
+.form-field:focus{border-color:var(--accent)}
+.form-label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-weight:500}
+.form-hint{font-size:11px;color:var(--text3);margin-top:-8px;margin-bottom:12px}
 .modal-actions{display:flex;gap:8px}
 .btn-cancel{flex:1;padding:13px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text2);cursor:pointer}
 .btn-confirm{flex:2;padding:13px;border-radius:var(--radius-sm);border:none;background:var(--accent);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#fff;cursor:pointer}
-.btn-confirm:active{opacity:0.85}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:#0f172a;color:#fff;font-size:13px;font-weight:500;padding:10px 20px;border-radius:30px;z-index:300;transition:transform 0.3s;white-space:nowrap}
 .toast.show{transform:translateX(-50%) translateY(0)}
 .install-banner{background:#185FA5;color:#fff;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;font-size:13px;flex-shrink:0}
@@ -133,10 +147,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 
 <div class="header">
   <div class="header-top">
-    <div>
-      <h1>Lista de asistencia</h1>
-      <div class="header-sub">Esc. Secundaria N°7 — Las Toninas</div>
-    </div>
+    <div><h1>Lista de asistencia</h1><div class="header-sub">Esc. Secundaria N°7 — Las Toninas</div></div>
     <div class="logo-badge">E7</div>
   </div>
   <div class="curso-tabs">
@@ -149,6 +160,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 <div class="nav">
   <div class="nav-btn active" onclick="setView('tomar',this)">Tomar lista</div>
   <div class="nav-btn" onclick="setView('horario',this)">Horario</div>
+  <div class="nav-btn" onclick="setView('agenda',this)">Agenda</div>
   <div class="nav-btn" onclick="setView('historial',this)">Historial</div>
 </div>
 
@@ -165,17 +177,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
       <div class="stat-card st"><div class="stat-num" id="cnt-t">0</div><div class="stat-lbl">Tardanzas</div></div>
     </div>
     <div class="lista-section">
-      <div class="lista-hint">Tocá un alumno para marcar su estado</div>
+      <div class="lista-top">
+        <div class="lista-hint">Tocá un alumno para marcar su estado</div>
+        <button class="btn-add-alumno" onclick="abrirModalAlumno()">+ Agregar</button>
+      </div>
       <div class="lista" id="lista-alumnos"></div>
     </div>
     <div class="export-area">
-      <button class="btn-export csv" onclick="exportarCSV()">Exportar Excel (.csv)</button>
+      <button class="btn-export csv" onclick="exportarCSV()">Exportar Excel</button>
       <button class="btn-export txt" onclick="exportarTexto()">Exportar resumen</button>
     </div>
   </div>
 
   <div id="view-horario" style="display:none">
     <div class="horario-section" id="horario-contenido"></div>
+  </div>
+
+  <div id="view-agenda" style="display:none">
+    <div class="agenda-section">
+      <input class="agenda-search" type="text" placeholder="🔍 Buscar profesor..." oninput="filtrarAgenda(this.value)">
+      <div id="agenda-contenido"></div>
+      <button class="btn-agregar-prof" onclick="abrirModalProf()">+ Agregar profesor</button>
+    </div>
   </div>
 
   <div id="view-historial" style="display:none">
@@ -194,6 +217,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
   </div>
 </div>
 
+<!-- MODAL ASISTENCIA -->
 <div class="modal-overlay" id="modal-overlay" onclick="cerrarModalBg(event)">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -205,7 +229,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
       <div class="est-btn" id="ebtn-t" onclick="selEstado('T')"><div class="icon">⊙</div><div class="lbl">Tardanza</div></div>
     </div>
     <label class="obs-label">Observaciones (opcional)</label>
-    <textarea class="obs-field" id="modal-obs" rows="2" placeholder="Ej: presenta certificado médico..."></textarea>
+    <textarea class="form-field" id="modal-obs" rows="2" placeholder="Ej: presenta certificado médico..."></textarea>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="cerrarModal()">Cancelar</button>
       <button class="btn-confirm" onclick="confirmarModal()">Confirmar</button>
@@ -213,83 +237,106 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
   </div>
 </div>
 
+<!-- MODAL AGREGAR ALUMNO -->
+<div class="modal-overlay" id="modal-alumno" onclick="if(event.target===this)cerrarModalAlumno()">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Agregar alumno</div>
+    <label class="form-label">Apellido y Nombre</label>
+    <input class="form-field" id="input-alumno" type="text" placeholder="Ej: GARCIA, Juan">
+    <div class="form-hint">Escribí primero el apellido, luego el nombre</div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="cerrarModalAlumno()">Cancelar</button>
+      <button class="btn-confirm" onclick="confirmarAgregarAlumno()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AGREGAR PROFESOR -->
+<div class="modal-overlay" id="modal-prof" onclick="if(event.target===this)cerrarModalProf()">
+  <div class="modal">
+    <div class="modal-handle"></div>
+    <div class="modal-title">Agregar profesor</div>
+    <label class="form-label">Nombre completo</label>
+    <input class="form-field" id="input-prof-nombre" type="text" placeholder="Ej: García Juan">
+    <label class="form-label">Materia</label>
+    <input class="form-field" id="input-prof-materia" type="text" placeholder="Ej: Matemática">
+    <label class="form-label">Cursos</label>
+    <input class="form-field" id="input-prof-cursos" type="text" placeholder="Ej: 4to, 5to">
+    <label class="form-label">Número de WhatsApp (sin 0 ni 15)</label>
+    <input class="form-field" id="input-prof-tel" type="tel" placeholder="Ej: 2246123456">
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="cerrarModalProf()">Cancelar</button>
+      <button class="btn-confirm" onclick="confirmarAgregarProf()">Agregar</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
-const CURSOS = {
-  "4to3ra": {
-    nombre: "4to 3ra",
-    alumnos: [
-      "ACOSTA, Facundo","AGÜERO, Santino","AGUIRRE, Jazmin","ALMIRÓN, Valentín",
-      "ANDRADA, Maia","ARANDA, Uma","AVILA, Brian","CARDOZO, Isaias",
-      "CASTELLI, Matías","CUELLO, Soe","CUEVAS, Eithan","DIAZ, Thiago",
-      "GARCIA, Alejo","GIRADO, Lautaro","HERNAGA, Lautaro","IRALA, Axel",
-      "LAUDIA, Mia","LEZCANO, Selene","LOSSADA, Morella","NEICUN, Thiago",
-      "OBREGON, Tobias","PATIÑO, Lucas","PIRIZ, Joaquin","RAMOS PATIÑO, Alma",
-      "RIOS, Delfina","ROJAS, Franco","ROMERO, Luciano","RUIZ, Marcos",
-      "RUIZ DIAZ, Zaira","SEUTIN, Melany","TRIVELLINI, Alen","VERBEKE, Abril"
-    ],
-    horario: {
-      "Lunes":[{m:"Ed. Física",p:"Sastre Mauro"},{m:"Literatura",p:"Hernan Cecilia"},{m:"Literatura",p:"Hernan Cecilia"},{m:"Matemática",p:"Escobar Claudia"},{m:"Matemática",p:"Escobar Claudia"}],
-      "Martes":[{m:"SyA",p:"Aguirre Paola"},{m:"SyA",p:"Aguirre Paola"},{m:"Ed. Física",p:"Sastre Mauro"},{m:"Int. a la Química",p:"Gorla Pablo"},{m:"Int. a la Química",p:"Gorla Pablo"}],
-      "Miércoles":[{m:"Int. a la Física",p:"Zapata Ana Laura"},{m:"Int. a la Física",p:"Zapata Ana Laura"},{m:"Inglés",p:"Lencina Carolina"},{m:"Inglés",p:"Lencina Carolina"},{m:"Matemática",p:"Escobar Claudia"}],
-      "Jueves":[{m:"Literatura",p:"Hernan Cecilia"},{m:"Biología",p:"Gauchat Julio"},{m:"Biología",p:"Gauchat Julio"},{m:"NTICX",p:"La Luz Julio"},{m:"NTICX",p:"La Luz Julio"}],
-      "Viernes":[{m:"Geografía",p:"Genazzini Olmos A."},{m:"Geografía",p:"Genazzini Olmos A."},{m:"Historia",p:"Poropat Eric"},{m:"Historia",p:"Poropat Eric"},{m:"—",p:""}]
-    }
-  },
-  "5to3ra": {
-    nombre: "5to 3ra",
-    alumnos: [
-      "ALMADA, Candela","CAMPOS, Jesus","CANETO, Thiago","CORDOBA, Nicolas",
-      "ESQUIVEL, Leandro Sebastian","FLORES, Agustin","FRETES PEDROZO, Axel Fernando",
-      "GOMEZ, Antonela","GUTIERREZ LUDMILA, Yasmin","GUY LUDMILA, Aramis",
-      "HERRERA, Juan Pablo","HERRERA, Leonel Agustin","IGLESIAS, Aixa",
-      "IGLESIAS AIXA, Delfina","LAURA, Braian","LEZCANO, Fiorella Agustina",
-      "MACARO PALACIO, Priscila","MELINAO, Guillermo Valentin",
-      "MONTENEGRO, Benjamin Abimael","MONTENEGRO, Nehemias Sebastian",
-      "OJEDA CANDIA, Luz Tamara","OSS, Tiziano Emiliano","PALLARES RAILEFF, Jazmin",
-      "POMBO, Alexis Gabriel","PORTIS, Priscila","PROCOPIO, Ariadna",
-      "SANCHEZ SAMANTHA, Melina"
-    ],
-    horario: {
-      "Lunes":[{m:"Matemática",p:"Romero Alejandro"},{m:"Matemática",p:"Romero Alejandro"},{m:"Inglés",p:"Lencina Carolina"},{m:"F. de la Química",p:"Azzolina Jorge"},{m:"CDT",p:"Lourenzo Paulina"}],
-      "Martes":[{m:"Arte",p:"Macia Paolone Candela"},{m:"Arte",p:"Macia Paolone Candela"},{m:"Matemática",p:"Romero Alejandro"},{m:"F. de la Química",p:"Azzolina Jorge"},{m:"F. de la Química",p:"Azzolina Jorge"}],
-      "Miércoles":[{m:"Física",p:"Fernandez Silvana"},{m:"Física",p:"Fernandez Silvana"},{m:"Historia",p:"Gonzalo Claudio"},{m:"Historia",p:"Gonzalo Claudio"},{m:"Inglés",p:"Lencina Carolina"}],
-      "Jueves":[{m:"Geografía",p:"Ortiz Julia"},{m:"Geografía",p:"Ortiz Julia"},{m:"Biología",p:"Aguirre Paola"},{m:"Biología",p:"Aguirre Paola"},{m:"Física",p:"Fernandez Silvana"}],
-      "Viernes":[{m:"Literatura",p:"Lucas Silvia"},{m:"Literatura",p:"Lucas Silvia"},{m:"CDT",p:"Lourenzo Paulina"},{m:"P. y Ciudadanía",p:"Ramirez Laudani S."},{m:"P. y Ciudadanía",p:"Ramirez Laudani S."}]
-    }
-  },
-  "6to3ra": {
-    nombre: "6to 3ra",
-    alumnos: [
-      "BENITEZ, Morena C.",
-      "CAPEL, Thiago Nahuel",
-      "CARUSO, Tiziana",
-      "CRISPI, Dafne",
-      "NUÑEZ CHOQUE, Daniel",
-      "PEREZ, Camila Belen",
-      "SUEGILO, Ludmila",
-      "TRIPOLONI, Gabriel"
-    ],
-    horario: {
-      "Lunes":[{m:"Fis. Clas. y Mod.",p:"Azzolina Jorge"},{m:"ADS",p:"Lourenzo Paulina"},{m:"ADS",p:"Lourenzo Paulina"},{m:"Fil. Hist.",p:"Lourenzo Paulina"},{m:"Matemática",p:"Merlo Alejandra"}],
-      "Martes":[{m:"Literatura",p:"Grippo Marilin"},{m:"Q. del Carbono",p:"Rodriguez Soledad"},{m:"Q. del Carbono",p:"Rodriguez Soledad"},{m:"TyC",p:"Chalub Cesar"},{m:"TyC",p:"Chalub Cesar"}],
-      "Miércoles":[{m:"Inglés",p:"Nicolo Sandra"},{m:"Inglés",p:"Nicolo Sandra"},{m:"B. Gen. y Soc.",p:"Tripodi M. Laura"},{m:"B. Gen. y Soc.",p:"Tripodi M. Laura"},{m:"—",p:""}],
-      "Jueves":[{m:"Literatura",p:"Grippo Marilin"},{m:"Literatura",p:"Grippo Marilin"},{m:"Fil. Hist.",p:"Lourenzo Paulina"},{m:"Fis. Clas. y Mod.",p:"Azzolina Jorge"},{m:"Fis. Clas. y Mod.",p:"Azzolina Jorge"}],
-      "Viernes":[{m:"B. Gen. y Soc.",p:"Tripodi M. Laura"},{m:"Q. del Carbono",p:"Rodriguez Soledad"},{m:"Matemática",p:"Merlo Alejandra"},{m:"Matemática",p:"Merlo Alejandra"},{m:"Matemática",p:"Merlo Alejandra"}]
-    }
-  }
+const CURSOS_BASE = {
+  "4to3ra":{nombre:"4to 3ra",alumnos:["ACOSTA, Facundo","AGÜERO, Santino","AGUIRRE, Jazmin","ALMIRÓN, Valentín","ANDRADA, Maia","ARANDA, Uma","AVILA, Brian","CARDOZO, Isaias","CASTELLI, Matías","CUELLO, Soe","CUEVAS, Eithan","DIAZ, Thiago","GARCIA, Alejo","GIRADO, Lautaro","HERNAGA, Lautaro","IRALA, Axel","LAUDIA, Mia","LEZCANO, Selene","LOSSADA, Morella","NEICUN, Thiago","OBREGON, Tobias","PATIÑO, Lucas","PIRIZ, Joaquin","RAMOS PATIÑO, Alma","RIOS, Delfina","ROJAS, Franco","ROMERO, Luciano","RUIZ, Marcos","RUIZ DIAZ, Zaira","SEUTIN, Melany","TRIVELLINI, Alen","VERBEKE, Abril"],horario:{"Lunes":[{m:"Ed. Física",p:"Sastre Mauro"},{m:"Literatura",p:"Hernan Cecilia"},{m:"Literatura",p:"Hernan Cecilia"},{m:"Matemática",p:"Escobar Claudia"},{m:"Matemática",p:"Escobar Claudia"}],"Martes":[{m:"SyA",p:"Aguirre Paola"},{m:"SyA",p:"Aguirre Paola"},{m:"Ed. Física",p:"Sastre Mauro"},{m:"Int. a la Química",p:"Gorla Pablo"},{m:"Int. a la Química",p:"Gorla Pablo"}],"Miércoles":[{m:"Int. a la Física",p:"Zapata Ana Laura"},{m:"Int. a la Física",p:"Zapata Ana Laura"},{m:"Inglés",p:"Lencina Carolina"},{m:"Inglés",p:"Lencina Carolina"},{m:"Matemática",p:"Escobar Claudia"}],"Jueves":[{m:"Literatura",p:"Hernan Cecilia"},{m:"Biología",p:"Gauchat Julio"},{m:"Biología",p:"Gauchat Julio"},{m:"NTICX",p:"La Luz Julio"},{m:"NTICX",p:"La Luz Julio"}],"Viernes":[{m:"Geografía",p:"Genazzini Olmos A."},{m:"Geografía",p:"Genazzini Olmos A."},{m:"Historia",p:"Poropat Eric"},{m:"Historia",p:"Poropat Eric"},{m:"—",p:""}]}},
+  "5to3ra":{nombre:"5to 3ra",alumnos:["ALMADA, Candela","CAMPOS, Jesus","CANETO, Thiago","CABARITI, Morena","CORDOBA, Nicolas","ESQUIVEL, Leandro Sebastian","FLORES, Agustin","FRETES PEDROZO, Axel Fernando","GOMEZ, Antonela","GUTIERREZ LUDMILA, Yasmin","GUY LUDMILA, Aramis","HERRERA, Juan Pablo","HERRERA, Leonel Agustin","IGLESIAS, Aixa","IGLESIAS AIXA, Delfina","LAURA, Braian","LEZCANO, Fiorella Agustina","MACARO PALACIO, Priscila","MELINAO, Guillermo Valentin","MONTENEGRO, Benjamin Abimael","MONTENEGRO, Nehemias Sebastian","OJEDA CANDIA, Luz Tamara","OSS, Tiziano Emiliano","PALLARES RAILEFF, Jazmin","POMBO, Alexis Gabriel","PORTIS, Priscila","PROCOPIO, Ariadna","SANCHEZ SAMANTHA, Melina"],horario:{"Lunes":[{m:"Matemática",p:"Romero Alejandro"},{m:"Matemática",p:"Romero Alejandro"},{m:"Inglés",p:"Lencina Carolina"},{m:"F. de la Química",p:"Azzolina Jorge"},{m:"CDT",p:"Lourenzo Paulina"}],"Martes":[{m:"Arte",p:"Macia Paolone Candela"},{m:"Arte",p:"Macia Paolone Candela"},{m:"Matemática",p:"Romero Alejandro"},{m:"F. de la Química",p:"Azzolina Jorge"},{m:"F. de la Química",p:"Azzolina Jorge"}],"Miércoles":[{m:"Física",p:"Fernandez Silvana"},{m:"Física",p:"Fernandez Silvana"},{m:"Historia",p:"Gonzalo Claudio"},{m:"Historia",p:"Gonzalo Claudio"},{m:"Inglés",p:"Lencina Carolina"}],"Jueves":[{m:"Geografía",p:"Ortiz Julia"},{m:"Geografía",p:"Ortiz Julia"},{m:"Biología",p:"Aguirre Paola"},{m:"Biología",p:"Aguirre Paola"},{m:"Física",p:"Fernandez Silvana"}],"Viernes":[{m:"Literatura",p:"Lucas Silvia"},{m:"Literatura",p:"Lucas Silvia"},{m:"CDT",p:"Lourenzo Paulina"},{m:"P. y Ciudadanía",p:"Ramirez Laudani S."},{m:"P. y Ciudadanía",p:"Ramirez Laudani S."}]}},
+  "6to3ra":{nombre:"6to 3ra",alumnos:["BENITEZ, Morena C.","CAPEL, Thiago Nahuel","CARUSO, Tiziana","CRISPI, Dafne","NUÑEZ CHOQUE, Daniel","PEREZ, Camila Belen","SUEGILO, Ludmila","TRIPOLONI, Gabriel"],horario:{"Lunes":[{m:"Fis. Clas. y Mod.",p:"Azzolina Jorge"},{m:"ADS",p:"Lourenzo Paulina"},{m:"ADS",p:"Lourenzo Paulina"},{m:"Fil. Hist.",p:"Lourenzo Paulina"},{m:"Matemática",p:"Merlo Alejandra"}],"Martes":[{m:"Literatura",p:"Grippo Marilin"},{m:"Q. del Carbono",p:"Rodriguez Soledad"},{m:"Q. del Carbono",p:"Rodriguez Soledad"},{m:"TyC",p:"Chalub Cesar"},{m:"TyC",p:"Chalub Cesar"}],"Miércoles":[{m:"Inglés",p:"Nicolo Sandra"},{m:"Inglés",p:"Nicolo Sandra"},{m:"B. Gen. y Soc.",p:"Tripodi M. Laura"},{m:"B. Gen. y Soc.",p:"Tripodi M. Laura"},{m:"—",p:""}],"Jueves":[{m:"Literatura",p:"Grippo Marilin"},{m:"Literatura",p:"Grippo Marilin"},{m:"Fil. Hist.",p:"Lourenzo Paulina"},{m:"Fis. Clas. y Mod.",p:"Azzolina Jorge"},{m:"Fis. Clas. y Mod.",p:"Azzolina Jorge"}],"Viernes":[{m:"B. Gen. y Soc.",p:"Tripodi M. Laura"},{m:"Q. del Carbono",p:"Rodriguez Soledad"},{m:"Matemática",p:"Merlo Alejandra"},{m:"Matemática",p:"Merlo Alejandra"},{m:"Matemática",p:"Merlo Alejandra"}]}}
 };
 
-const DIA_BG = {"Lunes":"#1a3a5c","Martes":"#1e4d8c","Miércoles":"#1a6b5a","Jueves":"#6b3a1a","Viernes":"#4a1a6b"};
+const DIA_BG={"Lunes":"#1a3a5c","Martes":"#1e4d8c","Miércoles":"#1a6b5a","Jueves":"#6b3a1a","Viernes":"#4a1a6b"};
+
+// PROFESORES BASE con números ya cargados
+const PROFS_BASE = [
+  {nombre:"Macia Paolone Candela",  materia:"Arte",               cursos:"5to", tel:"2216105723"},
+  {nombre:"Lencina Carolina",       materia:"Inglés",             cursos:"4to, 5to, 6to", tel:"1155173988"},
+  {nombre:"Ramirez Laudani Estefanía",materia:"P. y Ciudadanía",  cursos:"5to", tel:"2246406879"},
+  {nombre:"Azzolina Jorge",         materia:"F. Química / Fis. Clas.", cursos:"5to, 6to", tel:"2257500975"},
+  {nombre:"Poropat Eric",           materia:"Historia",           cursos:"4to", tel:"1161328149"},
+  {nombre:"Zapata Ana Laura",       materia:"Int. a la Física",   cursos:"4to", tel:"1132535001"},
+  {nombre:"Genasini Angela",        materia:"Literatura (reemplazante)", cursos:"—", tel:"2246517329", reemplazante:true},
+  {nombre:"Escobar Claudia",        materia:"Matemática",         cursos:"4to", tel:"1135851293"},
+  {nombre:"Coronel Martin",         materia:"NTICX (reemplazante)", cursos:"—", tel:"2246442393", reemplazante:true},
+  {nombre:"Sastre Mauro",           materia:"Ed. Física",         cursos:"4to", tel:"1153119241"},
+  {nombre:"Gorla Pablo",            materia:"Int. a la Química",  cursos:"4to", tel:"2246555903"},
+  {nombre:"Colafella Antonella",    materia:"Literatura (reemplazante)", cursos:"—", tel:"1136161086", reemplazante:true},
+  // Sin número aún — los cargás desde la app
+  {nombre:"Aguirre Paola",          materia:"SyA / Biología",     cursos:"4to, 5to", tel:""},
+  {nombre:"Chalub Cesar",           materia:"TyC",                cursos:"6to", tel:""},
+  {nombre:"Fernandez Silvana",      materia:"Física",             cursos:"5to", tel:""},
+  {nombre:"Gauchat Julio",          materia:"Biología",           cursos:"4to", tel:""},
+  {nombre:"Gonzalo Claudio",        materia:"Historia",           cursos:"5to", tel:""},
+  {nombre:"Grippo Marilin",         materia:"Literatura",         cursos:"6to", tel:""},
+  {nombre:"Hernan Cecilia",         materia:"Literatura",         cursos:"4to", tel:""},
+  {nombre:"La Luz Julio",           materia:"NTICX",              cursos:"4to", tel:""},
+  {nombre:"Lourenzo Paulina",       materia:"CDT / ADS / Fil. Hist.", cursos:"5to, 6to", tel:""},
+  {nombre:"Lucas Silvia",           materia:"Literatura",         cursos:"5to", tel:""},
+  {nombre:"Merlo Alejandra",        materia:"Matemática",         cursos:"6to", tel:""},
+  {nombre:"Nicolo Sandra",          materia:"Inglés",             cursos:"6to", tel:""},
+  {nombre:"Ortiz Julia",            materia:"Geografía",          cursos:"5to", tel:""},
+  {nombre:"Rodriguez Soledad",      materia:"Q. del Carbono",     cursos:"6to", tel:""},
+  {nombre:"Romero Alejandro",       materia:"Matemática",         cursos:"5to", tel:""},
+  {nombre:"Tripodi M. Laura",       materia:"B. Gen. y Soc.",     cursos:"6to", tel:""},
+  {nombre:"Genazzini Olmos A.",     materia:"Geografía",          cursos:"4to", tel:""},
+];
 
 let cursoActual="4to3ra", estados={}, observaciones={}, modalIdx=null, modalEst=null, db={};
+let alumnosExtra={}, profsExtra=[];
 let deferredPrompt=null;
 
-try { db=JSON.parse(localStorage.getItem('esec7_db')||'{}'); } catch(e) { db={}; }
+try{ db=JSON.parse(localStorage.getItem('esec7_db')||'{}'); }catch(e){ db={}; }
+try{ alumnosExtra=JSON.parse(localStorage.getItem('esec7_alumnos_extra')||'{}'); }catch(e){ alumnosExtra={}; }
+try{ profsExtra=JSON.parse(localStorage.getItem('esec7_profs_extra')||'[]'); }catch(e){ profsExtra=[]; }
+
 function saveDb(){ try{ localStorage.setItem('esec7_db',JSON.stringify(db)); }catch(e){} }
+function saveAlumnos(){ try{ localStorage.setItem('esec7_alumnos_extra',JSON.stringify(alumnosExtra)); }catch(e){} }
+function saveProfs(){ try{ localStorage.setItem('esec7_profs_extra',JSON.stringify(profsExtra)); }catch(e){} }
 function hoy(){ return new Date().toISOString().slice(0,10); }
-function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2200); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
+
+function getAlumnos(curso){
+  return [...CURSOS_BASE[curso].alumnos,...(alumnosExtra[curso]||[])].sort((a,b)=>a.localeCompare(b,'es'));
+}
+function getTodosProfs(){
+  return [...PROFS_BASE,...profsExtra].sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
+}
 
 window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredPrompt=e; document.getElementById('install-banner').style.display='flex'; });
 function instalarApp(){ if(!deferredPrompt) return; deferredPrompt.prompt(); deferredPrompt.userChoice.then(()=>{ deferredPrompt=null; document.getElementById('install-banner').style.display='none'; }); }
@@ -299,8 +346,7 @@ if('serviceWorker' in navigator){ navigator.serviceWorker.register('./sw.js').ca
 function setCurso(c,el){
   cursoActual=c;
   document.querySelectorAll('.curso-tab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  estados={}; observaciones={};
+  el.classList.add('active'); estados={}; observaciones={};
   cargarFecha(); renderHorario();
 }
 
@@ -313,16 +359,12 @@ function cargarFecha(){
 }
 
 function renderLista(){
-  const alumnos=CURSOS[cursoActual].alumnos;
+  const alumnos=getAlumnos(cursoActual);
   document.getElementById('lista-alumnos').innerHTML=alumnos.map((n,i)=>{
     const e=estados[i]||'';
     const cls=e==='P'?'badge-p':e==='A'?'badge-a':e==='T'?'badge-t':'badge-nd';
     const lbl=e==='P'?'Presente':e==='A'?'Ausente':e==='T'?'Tardanza':'Sin marcar';
-    return `<div class="alumno-row" onclick="abrirModal(${i})">
-      <div class="a-num">${i+1}</div>
-      <div class="a-nombre">${n}</div>
-      <div class="a-badge ${cls}">${lbl}</div>
-    </div>`;
+    return `<div class="alumno-row" onclick="abrirModal(${i})"><div class="a-num">${i+1}</div><div class="a-nombre">${n}</div><div class="a-badge ${cls}">${lbl}</div></div>`;
   }).join('');
   actualizarStats();
 }
@@ -335,51 +377,104 @@ function actualizarStats(){
 }
 
 function renderHorario(){
-  const h=CURSOS[cursoActual].horario;
+  const h=CURSOS_BASE[cursoActual].horario;
   document.getElementById('horario-contenido').innerHTML=Object.entries(h).map(([dia,horas])=>`
     <div class="dia-card">
-      <div class="dia-header" style="background:${DIA_BG[dia]||'#1a3a5c'}">
-        <div class="dia-nombre">${dia}</div>
-      </div>
-      <div class="dia-body">
-        ${horas.filter(h=>h.m&&h.m!=='—').map((h,i)=>`
-          <div class="hora-row">
-            <div class="hora-num">${i+1}</div>
-            <div>
-              <div class="hora-materia">${h.m}</div>
-              ${h.p?`<div class="hora-prof">${h.p}</div>`:''}
-            </div>
-          </div>`).join('')}
+      <div class="dia-header" style="background:${DIA_BG[dia]||'#1a3a5c'}"><div class="dia-nombre">${dia}</div></div>
+      <div class="dia-body">${horas.filter(h=>h.m&&h.m!=='—').map((h,i)=>`
+        <div class="hora-row"><div class="hora-num">${i+1}</div>
+        <div><div class="hora-materia">${h.m}</div>${h.p?`<div class="hora-prof">${h.p}</div>`:''}</div></div>`).join('')}
       </div>
     </div>`).join('');
 }
 
-function abrirModal(idx){
-  modalIdx=idx; modalEst=estados[idx]||null;
-  document.getElementById('modal-nombre').textContent=CURSOS[cursoActual].alumnos[idx];
-  document.getElementById('modal-subtxt').textContent=CURSOS[cursoActual].nombre+' — '+(document.getElementById('sel-fecha').value.split('-').reverse().join('/'));
-  document.getElementById('modal-obs').value=observaciones[idx]||'';
-  actualizarEstBtns();
-  document.getElementById('modal-overlay').classList.add('open');
+function renderAgenda(filtro=''){
+  const profs=getTodosProfs().filter(p=>!filtro||p.nombre.toLowerCase().includes(filtro.toLowerCase())||p.materia.toLowerCase().includes(filtro.toLowerCase()));
+  const conNum=profs.filter(p=>p.tel);
+  const sinNum=profs.filter(p=>!p.tel);
+  let html='';
+  if(conNum.length){
+    html+=`<div class="agenda-group-title">Con WhatsApp (${conNum.length})</div>`;
+    html+=conNum.map(p=>profCard(p)).join('');
+  }
+  if(sinNum.length){
+    html+=`<div class="agenda-group-title">Sin número aún (${sinNum.length})</div>`;
+    html+=sinNum.map(p=>profCard(p)).join('');
+  }
+  if(!profs.length) html='<div class="empty-state"><div style="font-size:36px">🔍</div><p>No se encontraron profesores</p></div>';
+  document.getElementById('agenda-contenido').innerHTML=html;
 }
 
+function profCard(p){
+  const num=p.tel?p.tel.replace(/\D/g,''):'';
+  const waBtn=num
+    ? `<a class="btn-wa" href="https://wa.me/54${num}?text=Hola%20${encodeURIComponent(p.nombre)}%2C%20te%20escribe%20Pablo%20de%20la%20Escuela%20N%C2%B07." target="_blank">💬 WhatsApp</a>`
+    : `<span class="prof-sin-numero">Sin número</span>`;
+  return `<div class="prof-card"><div class="prof-row">
+    <div class="prof-info">
+      <div class="prof-nombre">${p.nombre}</div>
+      <div class="prof-materia">${p.materia}${p.cursos&&p.cursos!=='—'?' · '+p.cursos:''}</div>
+      ${p.reemplazante?'<span class="prof-reemplazante">Reemplazante</span>':''}
+    </div>${waBtn}
+  </div></div>`;
+}
+
+function filtrarAgenda(v){ renderAgenda(v); }
+
+// MODAL ASISTENCIA
+function abrirModal(idx){
+  modalIdx=idx; modalEst=estados[idx]||null;
+  const alumnos=getAlumnos(cursoActual);
+  document.getElementById('modal-nombre').textContent=alumnos[idx];
+  document.getElementById('modal-subtxt').textContent=CURSOS_BASE[cursoActual].nombre+' — '+(document.getElementById('sel-fecha').value.split('-').reverse().join('/'));
+  document.getElementById('modal-obs').value=observaciones[idx]||'';
+  actualizarEstBtns(); document.getElementById('modal-overlay').classList.add('open');
+}
 function actualizarEstBtns(){
   document.getElementById('ebtn-p').className='est-btn'+(modalEst==='P'?' sel-p':'');
   document.getElementById('ebtn-a').className='est-btn'+(modalEst==='A'?' sel-a':'');
   document.getElementById('ebtn-t').className='est-btn'+(modalEst==='T'?' sel-t':'');
 }
-
 function selEstado(e){ modalEst=modalEst===e?null:e; actualizarEstBtns(); }
-
 function confirmarModal(){
   if(modalEst) estados[modalIdx]=modalEst; else delete estados[modalIdx];
   const obs=document.getElementById('modal-obs').value.trim();
   if(obs) observaciones[modalIdx]=obs; else delete observaciones[modalIdx];
   cerrarModal(); renderLista();
 }
-
 function cerrarModal(){ document.getElementById('modal-overlay').classList.remove('open'); modalIdx=null; modalEst=null; }
 function cerrarModalBg(e){ if(e.target===document.getElementById('modal-overlay')) cerrarModal(); }
+
+// MODAL AGREGAR ALUMNO
+function abrirModalAlumno(){ document.getElementById('input-alumno').value=''; document.getElementById('modal-alumno').classList.add('open'); setTimeout(()=>document.getElementById('input-alumno').focus(),300); }
+function cerrarModalAlumno(){ document.getElementById('modal-alumno').classList.remove('open'); }
+function confirmarAgregarAlumno(){
+  const val=document.getElementById('input-alumno').value.trim().toUpperCase();
+  if(!val){ toast('Escribí el nombre'); return; }
+  if(!alumnosExtra[cursoActual]) alumnosExtra[cursoActual]=[];
+  if(getAlumnos(cursoActual).includes(val)){ toast('Ya está en la lista'); return; }
+  alumnosExtra[cursoActual].push(val);
+  saveAlumnos(); cerrarModalAlumno(); renderLista();
+  toast(`${val} agregado a ${CURSOS_BASE[cursoActual].nombre}`);
+}
+
+// MODAL AGREGAR PROFESOR
+function abrirModalProf(){
+  ['input-prof-nombre','input-prof-materia','input-prof-cursos','input-prof-tel'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('modal-prof').classList.add('open');
+  setTimeout(()=>document.getElementById('input-prof-nombre').focus(),300);
+}
+function cerrarModalProf(){ document.getElementById('modal-prof').classList.remove('open'); }
+function confirmarAgregarProf(){
+  const nombre=document.getElementById('input-prof-nombre').value.trim();
+  const materia=document.getElementById('input-prof-materia').value.trim();
+  const cursos=document.getElementById('input-prof-cursos').value.trim();
+  const tel=document.getElementById('input-prof-tel').value.trim().replace(/\D/g,'');
+  if(!nombre){ toast('Escribí el nombre'); return; }
+  profsExtra.push({nombre,materia,cursos,tel});
+  saveProfs(); cerrarModalProf(); renderAgenda();
+  toast(`${nombre} agregado a la agenda`);
+}
 
 function guardarLista(){
   const fecha=document.getElementById('sel-fecha').value;
@@ -389,11 +484,12 @@ function guardarLista(){
 }
 
 function setView(v,el){
-  ['tomar','horario','historial'].forEach(id=>{ document.getElementById('view-'+id).style.display=v===id?'block':'none'; });
+  ['tomar','horario','agenda','historial'].forEach(id=>{ document.getElementById('view-'+id).style.display=v===id?'block':'none'; });
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   if(v==='historial') renderHistorial();
   if(v==='horario') renderHorario();
+  if(v==='agenda') renderAgenda();
 }
 
 function renderHistorial(){
@@ -402,62 +498,40 @@ function renderHistorial(){
   const filtrados=Object.keys(db).sort().reverse().filter(k=>!filtro||db[k].curso===filtro);
   if(!filtrados.length){ cont.innerHTML='<div class="empty-state"><div style="font-size:40px">📋</div><p>No hay registros guardados aún</p></div>'; return; }
   cont.innerHTML=filtrados.map(k=>{
-    const r=db[k], total=CURSOS[r.curso].alumnos.length;
+    const r=db[k],total=getAlumnos(r.curso).length;
     const v=Object.values(r.estados);
     const p=v.filter(x=>x==='P').length,a=v.filter(x=>x==='A').length,t=v.filter(x=>x==='T').length;
-    return `<div class="hist-card">
-      <div class="hist-top">
-        <div class="hist-fecha">${r.fecha.split('-').reverse().join('/')}</div>
-        <div class="hist-curso-lbl">${CURSOS[r.curso].nombre}</div>
-      </div>
-      <div class="hist-nums">
-        <span class="hn-p">P: ${p}</span><span class="hn-a">A: ${a}</span>
-        <span class="hn-t">T: ${t}</span><span class="hn-tot">/ ${total}</span>
-      </div>
-      <div class="hist-bar">
-        <div class="bar-p" style="width:${total?((p/total)*100).toFixed(0):0}%"></div>
-        <div class="bar-a" style="width:${total?((a/total)*100).toFixed(0):0}%"></div>
-        <div class="bar-t" style="width:${total?((t/total)*100).toFixed(0):0}%"></div>
-      </div>
-    </div>`;
+    return `<div class="hist-card"><div class="hist-top"><div class="hist-fecha">${r.fecha.split('-').reverse().join('/')}</div><div class="hist-curso-lbl">${CURSOS_BASE[r.curso].nombre}</div></div>
+    <div class="hist-nums"><span class="hn-p">P: ${p}</span><span class="hn-a">A: ${a}</span><span class="hn-t">T: ${t}</span><span class="hn-tot">/ ${total}</span></div>
+    <div class="hist-bar"><div class="bar-p" style="width:${total?(p/total*100).toFixed(0):0}%"></div><div class="bar-a" style="width:${total?(a/total*100).toFixed(0):0}%"></div><div class="bar-t" style="width:${total?(t/total*100).toFixed(0):0}%"></div></div></div>`;
   }).join('');
 }
 
-function limpiarHistorial(){
-  if(!confirm('¿Seguro que querés borrar todo el historial?')) return;
-  db={}; saveDb(); renderHistorial(); toast('Historial borrado');
-}
+function limpiarHistorial(){ if(!confirm('¿Seguro que querés borrar todo el historial?')) return; db={}; saveDb(); renderHistorial(); toast('Historial borrado'); }
 
 function exportarCSV(){
   const fecha=document.getElementById('sel-fecha').value;
   if(!fecha){ toast('Seleccioná una fecha primero'); return; }
-  const alumnos=CURSOS[cursoActual].alumnos;
+  const alumnos=getAlumnos(cursoActual);
   let csv='N\u00b0,Apellido y Nombre,Estado,Observaciones\n';
-  alumnos.forEach((n,i)=>{
-    const e=estados[i]||'';
-    const lbl=e==='P'?'Presente':e==='A'?'Ausente':e==='T'?'Tardanza':'Sin marcar';
-    csv+=`${i+1},"${n}","${lbl}","${(observaciones[i]||'').replace(/,/g,';')}"\n`;
-  });
+  alumnos.forEach((n,i)=>{ const e=estados[i]||''; csv+=`${i+1},"${n}","${e==='P'?'Presente':e==='A'?'Ausente':e==='T'?'Tardanza':'Sin marcar'}","${(observaciones[i]||'').replace(/,/g,';')}"\n`; });
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}));
-  a.download=`asistencia_${CURSOS[cursoActual].nombre.replace(/\s/g,'')}_${fecha}.csv`;
-  a.click(); toast('Archivo CSV descargado');
+  a.download=`asistencia_${CURSOS_BASE[cursoActual].nombre.replace(/\s/g,'')}_${fecha}.csv`;
+  a.click(); toast('CSV descargado');
 }
 
 function exportarTexto(){
   const fecha=document.getElementById('sel-fecha').value;
   if(!fecha){ toast('Seleccioná una fecha primero'); return; }
-  const alumnos=CURSOS[cursoActual].alumnos;
+  const alumnos=getAlumnos(cursoActual);
   const v=Object.values(estados);
-  let txt=`REGISTRO DE ASISTENCIA\nEscuela Secundaria N\u00b07 \u2014 Las Toninas\nCurso: ${CURSOS[cursoActual].nombre}    Fecha: ${fecha.split('-').reverse().join('/')}\n${'\u2500'.repeat(38)}\n`;
-  alumnos.forEach((n,i)=>{
-    const e=estados[i]||'';
-    txt+=`${String(i+1).padStart(2,'0')}. ${e==='P'?'[P]':e==='A'?'[A]':e==='T'?'[T]':'[ ]'} ${n}${observaciones[i]?'  ('+observaciones[i]+')':''}\n`;
-  });
+  let txt=`REGISTRO DE ASISTENCIA\nEscuela Secundaria N\u00b07 \u2014 Las Toninas\nCurso: ${CURSOS_BASE[cursoActual].nombre}    Fecha: ${fecha.split('-').reverse().join('/')}\n${'\u2500'.repeat(38)}\n`;
+  alumnos.forEach((n,i)=>{ const e=estados[i]||''; txt+=`${String(i+1).padStart(2,'0')}. ${e==='P'?'[P]':e==='A'?'[A]':e==='T'?'[T]':'[ ]'} ${n}${observaciones[i]?'  ('+observaciones[i]+')':''}\n`; });
   txt+=`${'\u2500'.repeat(38)}\nPresentes: ${v.filter(x=>x==='P').length}  |  Ausentes: ${v.filter(x=>x==='A').length}  |  Tardanzas: ${v.filter(x=>x==='T').length}\nTotal: ${alumnos.length}\n`;
   const a=document.createElement('a');
   a.href=URL.createObjectURL(new Blob([txt],{type:'text/plain;charset=utf-8'}));
-  a.download=`resumen_${CURSOS[cursoActual].nombre.replace(/\s/g,'')}_${fecha}.txt`;
+  a.download=`resumen_${CURSOS_BASE[cursoActual].nombre.replace(/\s/g,'')}_${fecha}.txt`;
   a.click(); toast('Resumen descargado');
 }
 
@@ -466,3 +540,4 @@ cargarFecha(); renderHorario();
 </script>
 </body>
 </html>
+
