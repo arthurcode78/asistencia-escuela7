@@ -18,27 +18,32 @@
   --green:#166534;--green-bg:#dcfce7;--red:#991b1b;--red-bg:#fee2e2;
   --amber:#92400e;--amber-bg:#fef3c7;--text:#0f172a;--text2:#64748b;
   --text3:#94a3b8;--border:#e2e8f0;--radius:12px;--radius-sm:8px;
-  --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
-  --wa:#25D366;
+  --shadow:0 1px 3px rgba(0,0,0,0.08);--wa:#25D366;
 }
 html,body{height:100%;overflow:hidden}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+
+/* HEADER */
 .header{background:var(--primary);padding:14px 16px 12px;flex-shrink:0}
 .header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-.header h1{font-size:18px;font-weight:600;color:#fff;letter-spacing:-0.3px}
+.header h1{font-size:18px;font-weight:600;color:#fff}
 .header-sub{font-size:11px;color:rgba(255,255,255,0.6);margin-top:1px}
 .logo-badge{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:13px;color:#fff;font-weight:500}
-.curso-tabs{display:flex;gap:5px;padding:0 0 2px}
+.curso-tabs{display:flex;gap:5px}
 .curso-tab{flex:1;padding:7px 0;text-align:center;font-size:11px;font-weight:500;border-radius:var(--radius-sm);background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);cursor:pointer;transition:all 0.2s}
 .curso-tab.active{background:#fff;color:var(--primary)}
-.nav{display:flex;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
-.nav-btn{flex:1;padding:10px 0;text-align:center;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;transition:all 0.2s}
+
+/* NAV */
+.nav{display:flex;background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0;overflow-x:auto}
+.nav-btn{flex:1;min-width:60px;padding:10px 4px;text-align:center;font-size:11px;font-weight:500;color:var(--text2);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+/* LISTA */
 .fecha-bar{background:var(--surface);padding:10px 16px;border-bottom:1px solid var(--border);display:flex;gap:8px;align-items:center}
 .fecha-bar label{font-size:13px;color:var(--text2);white-space:nowrap}
 .fecha-bar input[type=date]{flex:1;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--text);background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:7px 10px;outline:none}
-.btn-guardar{background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn-guardar{background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);padding:8px 14px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px 16px}
 .stat-card{background:var(--surface);border-radius:var(--radius);padding:12px;text-align:center;box-shadow:var(--shadow)}
 .stat-num{font-size:26px;font-weight:600;font-family:'DM Mono',monospace;line-height:1}
@@ -49,13 +54,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .lista-section{padding:0 16px 8px}
 .lista-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .lista-hint{font-size:12px;color:var(--text3)}
-.btn-add-alumno{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--accent);background:var(--primary-light);border:none;border-radius:20px;padding:5px 12px;cursor:pointer}
+.btn-add-sm{font-size:12px;font-weight:600;color:var(--accent);background:var(--primary-light);border:none;border-radius:20px;padding:5px 12px;cursor:pointer}
 .lista{background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
-.alumno-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background 0.1s;user-select:none}
+.alumno-row{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border);cursor:pointer;user-select:none}
 .alumno-row:last-child{border-bottom:none}
 .alumno-row:active{background:var(--surface2)}
 .a-num{width:22px;font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);text-align:right;flex-shrink:0}
-.a-nombre{flex:1;font-size:14px;color:var(--text);line-height:1.3}
+.a-nombre{flex:1;font-size:14px;color:var(--text)}
 .a-badge{font-size:11px;font-weight:600;padding:4px 9px;border-radius:20px;flex-shrink:0;min-width:70px;text-align:center}
 .badge-p{background:var(--green-bg);color:var(--green)}
 .badge-a{background:var(--red-bg);color:var(--red)}
@@ -65,6 +70,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .btn-export{flex:1;padding:11px 8px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;text-align:center}
 .btn-export.csv{background:var(--green-bg);color:var(--green);border-color:var(--green)}
 .btn-export.txt{background:var(--primary-light);color:var(--primary);border-color:var(--primary)}
+
+/* HORARIO */
 .horario-section{padding:12px 16px 24px}
 .dia-card{background:var(--surface);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
 .dia-header{padding:10px 14px}
@@ -82,15 +89,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 .agenda-search:focus{border-color:var(--accent)}
 .agenda-group-title{font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:0.6px;margin:14px 0 8px 2px}
 .prof-card{background:var(--surface);border-radius:var(--radius);margin-bottom:8px;box-shadow:var(--shadow);overflow:hidden}
-.prof-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;gap:10px}
+.prof-row{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;gap:8px}
 .prof-info{flex:1;min-width:0}
 .prof-nombre{font-size:14px;font-weight:600;color:var(--text)}
 .prof-materia{font-size:12px;color:var(--text2);margin-top:2px}
 .prof-reemplazante{font-size:10px;font-weight:600;color:var(--amber);background:var(--amber-bg);padding:2px 7px;border-radius:10px;display:inline-block;margin-top:3px}
-.btn-wa{display:flex;align-items:center;gap:5px;background:var(--wa);color:#fff;border:none;border-radius:20px;padding:8px 12px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap;flex-shrink:0}
-.btn-wa:active{opacity:0.85}
+.prof-actions{display:flex;gap:6px;align-items:center;flex-shrink:0}
+.btn-wa{display:flex;align-items:center;gap:5px;background:var(--wa);color:#fff;border:none;border-radius:20px;padding:7px 12px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-add-num{font-size:11px;font-weight:600;color:var(--accent);background:var(--primary-light);border:none;border-radius:20px;padding:7px 10px;cursor:pointer;white-space:nowrap}
+.btn-del-prof{width:30px;height:30px;border-radius:50%;background:var(--red-bg);color:var(--red);border:none;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .btn-agregar-prof{display:flex;align-items:center;gap:6px;width:100%;padding:13px 14px;background:var(--surface);border:1.5px dashed var(--border);border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;color:var(--text2);cursor:pointer;margin-top:4px}
-.prof-sin-numero{font-size:11px;color:var(--text3);white-space:nowrap}
+
+/* COMUNICADOS */
+.comuni-section{padding:12px 16px 24px}
+.comuni-label{font-size:12px;font-weight:600;color:var(--text2);margin-bottom:6px;display:block}
+.comuni-textarea{width:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;outline:none;resize:none;margin-bottom:12px;min-height:160px}
+.comuni-textarea:focus{border-color:var(--accent)}
+.comuni-grupos{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.grupo-btn{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;font-family:'DM Sans',sans-serif}
+.grupo-btn:active{background:var(--surface2)}
+.grupo-nombre{font-size:14px;font-weight:500;color:var(--text)}
+.grupo-copiar{font-size:12px;font-weight:600;color:var(--accent);background:var(--primary-light);padding:6px 12px;border-radius:20px;border:none;font-family:'DM Sans',sans-serif;cursor:pointer}
+.comuni-saved-title{font-size:12px;font-weight:600;color:var(--text2);margin:16px 0 8px;display:flex;justify-content:space-between;align-items:center}
+.comuni-saved-title button{font-size:11px;color:var(--red);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif}
+.comuni-card{background:var(--surface);border-radius:var(--radius);padding:14px;margin-bottom:8px;box-shadow:var(--shadow)}
+.comuni-card-fecha{font-size:11px;color:var(--text3);margin-bottom:6px}
+.comuni-card-texto{font-size:13px;color:var(--text);line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.comuni-card-actions{display:flex;gap:8px;margin-top:10px}
+.btn-comuni-copiar{flex:1;padding:8px;background:var(--primary-light);color:var(--primary);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.btn-comuni-del{padding:8px 12px;background:var(--red-bg);color:var(--red);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.btn-guardar-comuni{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:4px}
 
 /* HISTORIAL */
 .hist-section{padding:12px 16px 24px}
@@ -158,13 +186,16 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 </div>
 
 <div class="nav">
-  <div class="nav-btn active" onclick="setView('tomar',this)">Tomar lista</div>
-  <div class="nav-btn" onclick="setView('horario',this)">Horario</div>
-  <div class="nav-btn" onclick="setView('agenda',this)">Agenda</div>
-  <div class="nav-btn" onclick="setView('historial',this)">Historial</div>
+  <div class="nav-btn active" onclick="setView('tomar',this)">📋 Lista</div>
+  <div class="nav-btn" onclick="setView('horario',this)">🕐 Horario</div>
+  <div class="nav-btn" onclick="setView('agenda',this)">👤 Agenda</div>
+  <div class="nav-btn" onclick="setView('comuni',this)">📢 Avisos</div>
+  <div class="nav-btn" onclick="setView('historial',this)">📁 Historial</div>
 </div>
 
 <div class="scroll">
+
+  <!-- TOMAR LISTA -->
   <div id="view-tomar">
     <div class="fecha-bar">
       <label>Fecha:</label>
@@ -179,7 +210,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
     <div class="lista-section">
       <div class="lista-top">
         <div class="lista-hint">Tocá un alumno para marcar su estado</div>
-        <button class="btn-add-alumno" onclick="abrirModalAlumno()">+ Agregar</button>
+        <button class="btn-add-sm" onclick="abrirModalAlumno()">+ Agregar</button>
       </div>
       <div class="lista" id="lista-alumnos"></div>
     </div>
@@ -189,18 +220,52 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
     </div>
   </div>
 
+  <!-- HORARIO -->
   <div id="view-horario" style="display:none">
     <div class="horario-section" id="horario-contenido"></div>
   </div>
 
+  <!-- AGENDA -->
   <div id="view-agenda" style="display:none">
     <div class="agenda-section">
-      <input class="agenda-search" type="text" placeholder="🔍 Buscar profesor..." oninput="filtrarAgenda(this.value)">
+      <input class="agenda-search" type="text" placeholder="🔍 Buscar profesor..." oninput="renderAgenda(this.value)">
       <div id="agenda-contenido"></div>
       <button class="btn-agregar-prof" onclick="abrirModalProf()">+ Agregar profesor</button>
     </div>
   </div>
 
+  <!-- COMUNICADOS -->
+  <div id="view-comuni" style="display:none">
+    <div class="comuni-section">
+      <label class="comuni-label">Escribí o pegá el comunicado</label>
+      <textarea class="comuni-textarea" id="comuni-texto" placeholder="Ej: Estimadas familias, les informamos que el día viernes..."></textarea>
+      <button class="btn-guardar-comuni" onclick="guardarComunicado()">Guardar comunicado</button>
+      <label class="comuni-label" style="margin-top:4px">Copiar para enviar al grupo</label>
+      <div class="comuni-grupos">
+        <div class="grupo-btn" onclick="copiarComunicado('Estudiantes 4° 3°')">
+          <span class="grupo-nombre">👨‍🎓 Estudiantes 4° 3°</span>
+          <button class="grupo-copiar">Copiar</button>
+        </div>
+        <div class="grupo-btn" onclick="copiarComunicado('Estudiantes 5° 3°')">
+          <span class="grupo-nombre">👨‍🎓 Estudiantes 5° 3°</span>
+          <button class="grupo-copiar">Copiar</button>
+        </div>
+        <div class="grupo-btn" onclick="copiarComunicado('Estudiantes 6° 3°')">
+          <span class="grupo-nombre">👨‍🎓 Estudiantes 6° 3°</span>
+          <button class="grupo-copiar">Copiar</button>
+        </div>
+      </div>
+      <div id="comuni-historial-wrap">
+        <div class="comuni-saved-title">
+          <span>Comunicados guardados</span>
+          <button onclick="borrarTodosComunicados()">Borrar todos</button>
+        </div>
+        <div id="comuni-lista"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HISTORIAL -->
   <div id="view-historial" style="display:none">
     <div class="hist-section">
       <div class="hist-filter">
@@ -218,7 +283,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 </div>
 
 <!-- MODAL ASISTENCIA -->
-<div class="modal-overlay" id="modal-overlay" onclick="cerrarModalBg(event)">
+<div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)cerrarModal()">
   <div class="modal">
     <div class="modal-handle"></div>
     <div class="modal-nombre" id="modal-nombre"></div>
@@ -256,7 +321,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
 <div class="modal-overlay" id="modal-prof" onclick="if(event.target===this)cerrarModalProf()">
   <div class="modal">
     <div class="modal-handle"></div>
-    <div class="modal-title">Agregar profesor</div>
+    <div class="modal-title" id="modal-prof-title">Agregar profesor</div>
     <label class="form-label">Nombre completo</label>
     <input class="form-field" id="input-prof-nombre" type="text" placeholder="Ej: García Juan">
     <label class="form-label">Materia</label>
@@ -265,9 +330,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);dis
     <input class="form-field" id="input-prof-cursos" type="text" placeholder="Ej: 4to, 5to">
     <label class="form-label">Número de WhatsApp (sin 0 ni 15)</label>
     <input class="form-field" id="input-prof-tel" type="tel" placeholder="Ej: 2246123456">
+    <div class="form-hint">Código de área + número, sin espacios</div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="cerrarModalProf()">Cancelar</button>
-      <button class="btn-confirm" onclick="confirmarAgregarProf()">Agregar</button>
+      <button class="btn-confirm" id="btn-confirm-prof" onclick="confirmarProf()">Agregar</button>
     </div>
   </div>
 </div>
@@ -283,59 +349,65 @@ const CURSOS_BASE = {
 
 const DIA_BG={"Lunes":"#1a3a5c","Martes":"#1e4d8c","Miércoles":"#1a6b5a","Jueves":"#6b3a1a","Viernes":"#4a1a6b"};
 
-// PROFESORES BASE con números ya cargados
-const PROFS_BASE = [
-  {nombre:"Macia Paolone Candela",  materia:"Arte",               cursos:"5to", tel:"2216105723"},
-  {nombre:"Lencina Carolina",       materia:"Inglés",             cursos:"4to, 5to, 6to", tel:"1155173988"},
-  {nombre:"Ramirez Laudani Estefanía",materia:"P. y Ciudadanía",  cursos:"5to", tel:"2246406879"},
-  {nombre:"Azzolina Jorge",         materia:"F. Química / Fis. Clas.", cursos:"5to, 6to", tel:"2257500975"},
-  {nombre:"Poropat Eric",           materia:"Historia",           cursos:"4to", tel:"1161328149"},
-  {nombre:"Zapata Ana Laura",       materia:"Int. a la Física",   cursos:"4to", tel:"1132535001"},
-  {nombre:"Genasini Angela",        materia:"Literatura (reemplazante)", cursos:"—", tel:"2246517329", reemplazante:true},
-  {nombre:"Escobar Claudia",        materia:"Matemática",         cursos:"4to", tel:"1135851293"},
-  {nombre:"Coronel Martin",         materia:"NTICX (reemplazante)", cursos:"—", tel:"2246442393", reemplazante:true},
-  {nombre:"Sastre Mauro",           materia:"Ed. Física",         cursos:"4to", tel:"1153119241"},
-  {nombre:"Gorla Pablo",            materia:"Int. a la Química",  cursos:"4to", tel:"2246555903"},
-  {nombre:"Colafella Antonella",    materia:"Literatura (reemplazante)", cursos:"—", tel:"1136161086", reemplazante:true},
-  // Sin número aún — los cargás desde la app
-  {nombre:"Aguirre Paola",          materia:"SyA / Biología",     cursos:"4to, 5to", tel:""},
-  {nombre:"Chalub Cesar",           materia:"TyC",                cursos:"6to", tel:""},
-  {nombre:"Fernandez Silvana",      materia:"Física",             cursos:"5to", tel:""},
-  {nombre:"Gauchat Julio",          materia:"Biología",           cursos:"4to", tel:""},
-  {nombre:"Gonzalo Claudio",        materia:"Historia",           cursos:"5to", tel:""},
-  {nombre:"Grippo Marilin",         materia:"Literatura",         cursos:"6to", tel:""},
-  {nombre:"Hernan Cecilia",         materia:"Literatura",         cursos:"4to", tel:""},
-  {nombre:"La Luz Julio",           materia:"NTICX",              cursos:"4to", tel:""},
-  {nombre:"Lourenzo Paulina",       materia:"CDT / ADS / Fil. Hist.", cursos:"5to, 6to", tel:""},
-  {nombre:"Lucas Silvia",           materia:"Literatura",         cursos:"5to", tel:""},
-  {nombre:"Merlo Alejandra",        materia:"Matemática",         cursos:"6to", tel:""},
-  {nombre:"Nicolo Sandra",          materia:"Inglés",             cursos:"6to", tel:""},
-  {nombre:"Ortiz Julia",            materia:"Geografía",          cursos:"5to", tel:""},
-  {nombre:"Rodriguez Soledad",      materia:"Q. del Carbono",     cursos:"6to", tel:""},
-  {nombre:"Romero Alejandro",       materia:"Matemática",         cursos:"5to", tel:""},
-  {nombre:"Tripodi M. Laura",       materia:"B. Gen. y Soc.",     cursos:"6to", tel:""},
-  {nombre:"Genazzini Olmos A.",     materia:"Geografía",          cursos:"4to", tel:""},
+// Profesores base — los que no tienen tel se pueden editar desde la app
+let PROFS_BASE = [
+  {id:"p1",nombre:"Macia Paolone Candela",materia:"Arte",cursos:"5to",tel:"2216105723"},
+  {id:"p2",nombre:"Lencina Carolina",materia:"Inglés",cursos:"4to, 5to, 6to",tel:"1155173988"},
+  {id:"p3",nombre:"Ramirez Laudani Estefanía",materia:"P. y Ciudadanía",cursos:"5to",tel:"2246406879"},
+  {id:"p4",nombre:"Azzolina Jorge",materia:"F. Química / Fis. Clas.",cursos:"5to, 6to",tel:"2257500975"},
+  {id:"p5",nombre:"Poropat Eric",materia:"Historia",cursos:"4to",tel:"1161328149"},
+  {id:"p6",nombre:"Zapata Ana Laura",materia:"Int. a la Física",cursos:"4to",tel:"1132535001"},
+  {id:"p7",nombre:"Genasini Angela",materia:"Literatura",cursos:"Reemplazante",tel:"2246517329",reemplazante:true},
+  {id:"p8",nombre:"Escobar Claudia",materia:"Matemática",cursos:"4to",tel:"1135851293"},
+  {id:"p9",nombre:"Coronel Martin",materia:"NTICX",cursos:"Reemplazante",tel:"2246442393",reemplazante:true},
+  {id:"p10",nombre:"Sastre Mauro",materia:"Ed. Física",cursos:"4to",tel:"1153119241"},
+  {id:"p11",nombre:"Gorla Pablo",materia:"Int. a la Química",cursos:"4to",tel:"2246555903"},
+  {id:"p12",nombre:"Colafella Antonella",materia:"Literatura",cursos:"Reemplazante",tel:"1136161086",reemplazante:true},
+  {id:"p13",nombre:"Aguirre Paola",materia:"SyA / Biología",cursos:"4to, 5to",tel:""},
+  {id:"p14",nombre:"Chalub Cesar",materia:"TyC",cursos:"6to",tel:""},
+  {id:"p15",nombre:"Fernandez Silvana",materia:"Física",cursos:"5to",tel:""},
+  {id:"p16",nombre:"Gauchat Julio",materia:"Biología",cursos:"4to",tel:""},
+  {id:"p17",nombre:"Genazzini Olmos A.",materia:"Geografía",cursos:"4to",tel:""},
+  {id:"p18",nombre:"Gonzalo Claudio",materia:"Historia",cursos:"5to",tel:""},
+  {id:"p19",nombre:"Grippo Marilin",materia:"Literatura",cursos:"6to",tel:""},
+  {id:"p20",nombre:"Hernan Cecilia",materia:"Literatura",cursos:"4to",tel:""},
+  {id:"p21",nombre:"La Luz Julio",materia:"NTICX",cursos:"4to",tel:""},
+  {id:"p22",nombre:"Lourenzo Paulina",materia:"CDT / ADS / Fil. Hist.",cursos:"5to, 6to",tel:""},
+  {id:"p23",nombre:"Lucas Silvia",materia:"Literatura",cursos:"5to",tel:""},
+  {id:"p24",nombre:"Merlo Alejandra",materia:"Matemática",cursos:"6to",tel:""},
+  {id:"p25",nombre:"Nicolo Sandra",materia:"Inglés",cursos:"6to",tel:""},
+  {id:"p26",nombre:"Ortiz Julia",materia:"Geografía",cursos:"5to",tel:""},
+  {id:"p27",nombre:"Rodriguez Soledad",materia:"Q. del Carbono",cursos:"6to",tel:""},
+  {id:"p28",nombre:"Romero Alejandro",materia:"Matemática",cursos:"5to",tel:""},
+  {id:"p29",nombre:"Tripodi M. Laura",materia:"B. Gen. y Soc.",cursos:"6to",tel:""},
 ];
 
-let cursoActual="4to3ra", estados={}, observaciones={}, modalIdx=null, modalEst=null, db={};
-let alumnosExtra={}, profsExtra=[];
+let cursoActual="4to3ra", estados={}, observaciones={}, modalIdx=null, modalEst=null;
+let db={}, alumnosExtra={}, profsExtra=[], profsEliminados=[], comunicados=[];
+let editProfId=null;
 let deferredPrompt=null;
 
-try{ db=JSON.parse(localStorage.getItem('esec7_db')||'{}'); }catch(e){ db={}; }
-try{ alumnosExtra=JSON.parse(localStorage.getItem('esec7_alumnos_extra')||'{}'); }catch(e){ alumnosExtra={}; }
-try{ profsExtra=JSON.parse(localStorage.getItem('esec7_profs_extra')||'[]'); }catch(e){ profsExtra=[]; }
+try{ db=JSON.parse(localStorage.getItem('esec7_db')||'{}'); }catch(e){}
+try{ alumnosExtra=JSON.parse(localStorage.getItem('esec7_alumnos')||'{}'); }catch(e){}
+try{ profsExtra=JSON.parse(localStorage.getItem('esec7_profs')||'[]'); }catch(e){}
+try{ profsEliminados=JSON.parse(localStorage.getItem('esec7_profs_del')||'[]'); }catch(e){}
+try{ comunicados=JSON.parse(localStorage.getItem('esec7_comuni')||'[]'); }catch(e){}
+// Cargar números editados de profs base
+let telOverrides={};
+try{ telOverrides=JSON.parse(localStorage.getItem('esec7_tels')||'{}'); }catch(e){}
 
-function saveDb(){ try{ localStorage.setItem('esec7_db',JSON.stringify(db)); }catch(e){} }
-function saveAlumnos(){ try{ localStorage.setItem('esec7_alumnos_extra',JSON.stringify(alumnosExtra)); }catch(e){} }
-function saveProfs(){ try{ localStorage.setItem('esec7_profs_extra',JSON.stringify(profsExtra)); }catch(e){} }
+function save(key,val){ try{ localStorage.setItem(key,JSON.stringify(val)); }catch(e){} }
 function hoy(){ return new Date().toISOString().slice(0,10); }
+function fechaLegible(iso){ return iso.split('-').reverse().join('/'); }
 function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500); }
 
-function getAlumnos(curso){
-  return [...CURSOS_BASE[curso].alumnos,...(alumnosExtra[curso]||[])].sort((a,b)=>a.localeCompare(b,'es'));
-}
-function getTodosProfs(){
-  return [...PROFS_BASE,...profsExtra].sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
+function getAlumnos(c){ return [...CURSOS_BASE[c].alumnos,...(alumnosExtra[c]||[])].sort((a,b)=>a.localeCompare(b,'es')); }
+
+function getAllProfs(){
+  const base=PROFS_BASE
+    .filter(p=>!profsEliminados.includes(p.id))
+    .map(p=>({...p, tel: telOverrides[p.id]!==undefined ? telOverrides[p.id] : p.tel}));
+  return [...base,...profsExtra].sort((a,b)=>a.nombre.localeCompare(b.nombre,'es'));
 }
 
 window.addEventListener('beforeinstallprompt',e=>{ e.preventDefault(); deferredPrompt=e; document.getElementById('install-banner').style.display='flex'; });
@@ -384,56 +456,121 @@ function renderHorario(){
       <div class="dia-body">${horas.filter(h=>h.m&&h.m!=='—').map((h,i)=>`
         <div class="hora-row"><div class="hora-num">${i+1}</div>
         <div><div class="hora-materia">${h.m}</div>${h.p?`<div class="hora-prof">${h.p}</div>`:''}</div></div>`).join('')}
-      </div>
-    </div>`).join('');
+      </div></div>`).join('');
 }
 
 function renderAgenda(filtro=''){
-  const profs=getTodosProfs().filter(p=>!filtro||p.nombre.toLowerCase().includes(filtro.toLowerCase())||p.materia.toLowerCase().includes(filtro.toLowerCase()));
+  const profs=getAllProfs().filter(p=>!filtro||p.nombre.toLowerCase().includes(filtro.toLowerCase())||p.materia.toLowerCase().includes(filtro.toLowerCase()));
   const conNum=profs.filter(p=>p.tel);
   const sinNum=profs.filter(p=>!p.tel);
   let html='';
-  if(conNum.length){
-    html+=`<div class="agenda-group-title">Con WhatsApp (${conNum.length})</div>`;
-    html+=conNum.map(p=>profCard(p)).join('');
-  }
-  if(sinNum.length){
-    html+=`<div class="agenda-group-title">Sin número aún (${sinNum.length})</div>`;
-    html+=sinNum.map(p=>profCard(p)).join('');
-  }
+  if(conNum.length){ html+=`<div class="agenda-group-title">Con WhatsApp (${conNum.length})</div>`+conNum.map(p=>profCard(p)).join(''); }
+  if(sinNum.length){ html+=`<div class="agenda-group-title">Sin número (${sinNum.length})</div>`+sinNum.map(p=>profCard(p)).join(''); }
   if(!profs.length) html='<div class="empty-state"><div style="font-size:36px">🔍</div><p>No se encontraron profesores</p></div>';
   document.getElementById('agenda-contenido').innerHTML=html;
 }
 
 function profCard(p){
-  const num=p.tel?p.tel.replace(/\D/g,''):'';
-  const waBtn=num
-    ? `<a class="btn-wa" href="https://wa.me/54${num}?text=Hola%20${encodeURIComponent(p.nombre)}%2C%20te%20escribe%20Pablo%20de%20la%20Escuela%20N%C2%B07." target="_blank">💬 WhatsApp</a>`
-    : `<span class="prof-sin-numero">Sin número</span>`;
+  const num=(p.tel||'').replace(/\D/g,'');
+  let accion='';
+  if(num){
+    accion=`<a class="btn-wa" href="https://wa.me/54${num}?text=Hola%20${encodeURIComponent(p.nombre)}%2C%20te%20escribe%20Pablo%20de%20la%20Escuela%20N%C2%B07." target="_blank">💬 WhatsApp</a>`;
+  } else {
+    accion=`<button class="btn-add-num" onclick="editarNumero('${p.id||'extra_'+p.nombre}','${p.nombre}')">+ Número</button>`;
+  }
   return `<div class="prof-card"><div class="prof-row">
     <div class="prof-info">
       <div class="prof-nombre">${p.nombre}</div>
-      <div class="prof-materia">${p.materia}${p.cursos&&p.cursos!=='—'?' · '+p.cursos:''}</div>
+      <div class="prof-materia">${p.materia} · ${p.cursos}</div>
       ${p.reemplazante?'<span class="prof-reemplazante">Reemplazante</span>':''}
-    </div>${waBtn}
+    </div>
+    <div class="prof-actions">
+      ${accion}
+      <button class="btn-del-prof" onclick="eliminarProf('${p.id||'extra_'+p.nombre}','${p.nombre.replace(/'/g,"\\'")}')">✕</button>
+    </div>
   </div></div>`;
 }
 
-function filtrarAgenda(v){ renderAgenda(v); }
+function editarNumero(id, nombre){
+  editProfId=id;
+  document.getElementById('modal-prof-title').textContent='Agregar número — '+nombre;
+  document.getElementById('input-prof-nombre').value=nombre;
+  document.getElementById('input-prof-nombre').disabled=true;
+  document.getElementById('input-prof-materia').value='';
+  document.getElementById('input-prof-materia').style.display='none';
+  document.getElementById('input-prof-cursos').value='';
+  document.getElementById('input-prof-cursos').style.display='none';
+  document.getElementById('input-prof-tel').value='';
+  document.getElementById('btn-confirm-prof').textContent='Guardar número';
+  document.getElementById('modal-prof').classList.add('open');
+  setTimeout(()=>document.getElementById('input-prof-tel').focus(),300);
+}
+
+function eliminarProf(id, nombre){
+  if(!confirm(`¿Eliminar a ${nombre} de la agenda?`)) return;
+  if(id.startsWith('extra_')){
+    profsExtra=profsExtra.filter(p=>p.nombre!==nombre);
+    save('esec7_profs',profsExtra);
+  } else {
+    profsEliminados.push(id);
+    save('esec7_profs_del',profsEliminados);
+  }
+  renderAgenda(); toast(`${nombre} eliminado de la agenda`);
+}
+
+function abrirModalProf(){
+  editProfId=null;
+  document.getElementById('modal-prof-title').textContent='Agregar profesor';
+  document.getElementById('input-prof-nombre').value='';
+  document.getElementById('input-prof-nombre').disabled=false;
+  document.getElementById('input-prof-materia').value='';
+  document.getElementById('input-prof-materia').style.display='';
+  document.getElementById('input-prof-cursos').value='';
+  document.getElementById('input-prof-cursos').style.display='';
+  document.getElementById('input-prof-tel').value='';
+  document.getElementById('btn-confirm-prof').textContent='Agregar';
+  document.getElementById('modal-prof').classList.add('open');
+  setTimeout(()=>document.getElementById('input-prof-nombre').focus(),300);
+}
+function cerrarModalProf(){ document.getElementById('modal-prof').classList.remove('open'); editProfId=null; }
+
+function confirmarProf(){
+  const tel=document.getElementById('input-prof-tel').value.trim().replace(/\D/g,'');
+  if(editProfId){
+    // Solo guardar número
+    if(!tel){ toast('Escribí el número'); return; }
+    if(editProfId.startsWith('extra_')){
+      const nombre=document.getElementById('input-prof-nombre').value;
+      const idx=profsExtra.findIndex(p=>p.nombre===nombre);
+      if(idx>=0){ profsExtra[idx].tel=tel; save('esec7_profs',profsExtra); }
+    } else {
+      telOverrides[editProfId]=tel;
+      save('esec7_tels',telOverrides);
+    }
+    cerrarModalProf(); renderAgenda(); toast('Número guardado');
+  } else {
+    // Nuevo profesor
+    const nombre=document.getElementById('input-prof-nombre').value.trim();
+    if(!nombre){ toast('Escribí el nombre'); return; }
+    const materia=document.getElementById('input-prof-materia').value.trim();
+    const cursos=document.getElementById('input-prof-cursos').value.trim();
+    profsExtra.push({nombre,materia,cursos,tel});
+    save('esec7_profs',profsExtra);
+    cerrarModalProf(); renderAgenda(); toast(`${nombre} agregado`);
+  }
+}
 
 // MODAL ASISTENCIA
 function abrirModal(idx){
   modalIdx=idx; modalEst=estados[idx]||null;
   const alumnos=getAlumnos(cursoActual);
   document.getElementById('modal-nombre').textContent=alumnos[idx];
-  document.getElementById('modal-subtxt').textContent=CURSOS_BASE[cursoActual].nombre+' — '+(document.getElementById('sel-fecha').value.split('-').reverse().join('/'));
+  document.getElementById('modal-subtxt').textContent=CURSOS_BASE[cursoActual].nombre+' — '+fechaLegible(document.getElementById('sel-fecha').value);
   document.getElementById('modal-obs').value=observaciones[idx]||'';
   actualizarEstBtns(); document.getElementById('modal-overlay').classList.add('open');
 }
 function actualizarEstBtns(){
-  document.getElementById('ebtn-p').className='est-btn'+(modalEst==='P'?' sel-p':'');
-  document.getElementById('ebtn-a').className='est-btn'+(modalEst==='A'?' sel-a':'');
-  document.getElementById('ebtn-t').className='est-btn'+(modalEst==='T'?' sel-t':'');
+  ['p','a','t'].forEach(e=>{ document.getElementById('ebtn-'+e).className='est-btn'+(modalEst===e.toUpperCase()?' sel-'+e:''); });
 }
 function selEstado(e){ modalEst=modalEst===e?null:e; actualizarEstBtns(); }
 function confirmarModal(){
@@ -443,9 +580,8 @@ function confirmarModal(){
   cerrarModal(); renderLista();
 }
 function cerrarModal(){ document.getElementById('modal-overlay').classList.remove('open'); modalIdx=null; modalEst=null; }
-function cerrarModalBg(e){ if(e.target===document.getElementById('modal-overlay')) cerrarModal(); }
 
-// MODAL AGREGAR ALUMNO
+// MODAL ALUMNO
 function abrirModalAlumno(){ document.getElementById('input-alumno').value=''; document.getElementById('modal-alumno').classList.add('open'); setTimeout(()=>document.getElementById('input-alumno').focus(),300); }
 function cerrarModalAlumno(){ document.getElementById('modal-alumno').classList.remove('open'); }
 function confirmarAgregarAlumno(){
@@ -454,42 +590,79 @@ function confirmarAgregarAlumno(){
   if(!alumnosExtra[cursoActual]) alumnosExtra[cursoActual]=[];
   if(getAlumnos(cursoActual).includes(val)){ toast('Ya está en la lista'); return; }
   alumnosExtra[cursoActual].push(val);
-  saveAlumnos(); cerrarModalAlumno(); renderLista();
-  toast(`${val} agregado a ${CURSOS_BASE[cursoActual].nombre}`);
-}
-
-// MODAL AGREGAR PROFESOR
-function abrirModalProf(){
-  ['input-prof-nombre','input-prof-materia','input-prof-cursos','input-prof-tel'].forEach(id=>document.getElementById(id).value='');
-  document.getElementById('modal-prof').classList.add('open');
-  setTimeout(()=>document.getElementById('input-prof-nombre').focus(),300);
-}
-function cerrarModalProf(){ document.getElementById('modal-prof').classList.remove('open'); }
-function confirmarAgregarProf(){
-  const nombre=document.getElementById('input-prof-nombre').value.trim();
-  const materia=document.getElementById('input-prof-materia').value.trim();
-  const cursos=document.getElementById('input-prof-cursos').value.trim();
-  const tel=document.getElementById('input-prof-tel').value.trim().replace(/\D/g,'');
-  if(!nombre){ toast('Escribí el nombre'); return; }
-  profsExtra.push({nombre,materia,cursos,tel});
-  saveProfs(); cerrarModalProf(); renderAgenda();
-  toast(`${nombre} agregado a la agenda`);
+  save('esec7_alumnos',alumnosExtra); cerrarModalAlumno(); renderLista();
+  toast(`${val} agregado`);
 }
 
 function guardarLista(){
   const fecha=document.getElementById('sel-fecha').value;
   if(!fecha){ toast('Seleccioná una fecha primero'); return; }
   db[cursoActual+'_'+fecha]={curso:cursoActual,fecha,estados:{...estados},observaciones:{...observaciones}};
-  saveDb(); toast('Lista guardada correctamente');
+  save('esec7_db',db); toast('Lista guardada correctamente');
+}
+
+// COMUNICADOS
+function guardarComunicado(){
+  const texto=document.getElementById('comuni-texto').value.trim();
+  if(!texto){ toast('Escribí un comunicado primero'); return; }
+  comunicados.unshift({id:Date.now(),fecha:hoy(),texto});
+  save('esec7_comuni',comunicados);
+  renderComunicados(); toast('Comunicado guardado');
+}
+
+function copiarComunicado(grupo){
+  const texto=document.getElementById('comuni-texto').value.trim();
+  if(!texto){ toast('Escribí el comunicado primero'); return; }
+  const msg=`📢 *Escuela Secundaria N°7 — Las Toninas*\n*Grupo: ${grupo}*\n\n${texto}`;
+  navigator.clipboard.writeText(msg).then(()=>{ toast('Copiado — pegalo en el grupo de WhatsApp'); }).catch(()=>{
+    // Fallback
+    const ta=document.createElement('textarea');
+    ta.value=msg; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+    toast('Copiado — pegalo en el grupo de WhatsApp');
+  });
+}
+
+function copiarComunicadoGuardado(id){
+  const c=comunicados.find(x=>x.id===id);
+  if(!c) return;
+  navigator.clipboard.writeText(c.texto).catch(()=>{
+    const ta=document.createElement('textarea'); ta.value=c.texto; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  toast('Copiado');
+}
+
+function eliminarComunicado(id){
+  comunicados=comunicados.filter(c=>c.id!==id);
+  save('esec7_comuni',comunicados); renderComunicados();
+}
+
+function borrarTodosComunicados(){
+  if(!confirm('¿Borrar todos los comunicados guardados?')) return;
+  comunicados=[]; save('esec7_comuni',comunicados); renderComunicados(); toast('Comunicados borrados');
+}
+
+function renderComunicados(){
+  const cont=document.getElementById('comuni-lista');
+  if(!comunicados.length){ cont.innerHTML='<div class="empty-state" style="padding:24px 0"><p>No hay comunicados guardados aún</p></div>'; return; }
+  cont.innerHTML=comunicados.map(c=>`
+    <div class="comuni-card">
+      <div class="comuni-card-fecha">${fechaLegible(c.fecha)}</div>
+      <div class="comuni-card-texto">${c.texto}</div>
+      <div class="comuni-card-actions">
+        <button class="btn-comuni-copiar" onclick="copiarComunicadoGuardado(${c.id})">📋 Copiar</button>
+        <button class="btn-comuni-del" onclick="eliminarComunicado(${c.id})">Eliminar</button>
+      </div>
+    </div>`).join('');
 }
 
 function setView(v,el){
-  ['tomar','horario','agenda','historial'].forEach(id=>{ document.getElementById('view-'+id).style.display=v===id?'block':'none'; });
+  ['tomar','horario','agenda','comuni','historial'].forEach(id=>{ document.getElementById('view-'+id).style.display=v===id?'block':'none'; });
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   el.classList.add('active');
   if(v==='historial') renderHistorial();
   if(v==='horario') renderHorario();
   if(v==='agenda') renderAgenda();
+  if(v==='comuni') renderComunicados();
 }
 
 function renderHistorial(){
@@ -501,13 +674,13 @@ function renderHistorial(){
     const r=db[k],total=getAlumnos(r.curso).length;
     const v=Object.values(r.estados);
     const p=v.filter(x=>x==='P').length,a=v.filter(x=>x==='A').length,t=v.filter(x=>x==='T').length;
-    return `<div class="hist-card"><div class="hist-top"><div class="hist-fecha">${r.fecha.split('-').reverse().join('/')}</div><div class="hist-curso-lbl">${CURSOS_BASE[r.curso].nombre}</div></div>
+    return `<div class="hist-card"><div class="hist-top"><div class="hist-fecha">${fechaLegible(r.fecha)}</div><div class="hist-curso-lbl">${CURSOS_BASE[r.curso].nombre}</div></div>
     <div class="hist-nums"><span class="hn-p">P: ${p}</span><span class="hn-a">A: ${a}</span><span class="hn-t">T: ${t}</span><span class="hn-tot">/ ${total}</span></div>
     <div class="hist-bar"><div class="bar-p" style="width:${total?(p/total*100).toFixed(0):0}%"></div><div class="bar-a" style="width:${total?(a/total*100).toFixed(0):0}%"></div><div class="bar-t" style="width:${total?(t/total*100).toFixed(0):0}%"></div></div></div>`;
   }).join('');
 }
 
-function limpiarHistorial(){ if(!confirm('¿Seguro que querés borrar todo el historial?')) return; db={}; saveDb(); renderHistorial(); toast('Historial borrado'); }
+function limpiarHistorial(){ if(!confirm('¿Borrar todo el historial?')) return; db={}; save('esec7_db',db); renderHistorial(); toast('Historial borrado'); }
 
 function exportarCSV(){
   const fecha=document.getElementById('sel-fecha').value;
@@ -526,7 +699,7 @@ function exportarTexto(){
   if(!fecha){ toast('Seleccioná una fecha primero'); return; }
   const alumnos=getAlumnos(cursoActual);
   const v=Object.values(estados);
-  let txt=`REGISTRO DE ASISTENCIA\nEscuela Secundaria N\u00b07 \u2014 Las Toninas\nCurso: ${CURSOS_BASE[cursoActual].nombre}    Fecha: ${fecha.split('-').reverse().join('/')}\n${'\u2500'.repeat(38)}\n`;
+  let txt=`REGISTRO DE ASISTENCIA\nEscuela Secundaria N\u00b07 \u2014 Las Toninas\nCurso: ${CURSOS_BASE[cursoActual].nombre}    Fecha: ${fechaLegible(fecha)}\n${'\u2500'.repeat(38)}\n`;
   alumnos.forEach((n,i)=>{ const e=estados[i]||''; txt+=`${String(i+1).padStart(2,'0')}. ${e==='P'?'[P]':e==='A'?'[A]':e==='T'?'[T]':'[ ]'} ${n}${observaciones[i]?'  ('+observaciones[i]+')':''}\n`; });
   txt+=`${'\u2500'.repeat(38)}\nPresentes: ${v.filter(x=>x==='P').length}  |  Ausentes: ${v.filter(x=>x==='A').length}  |  Tardanzas: ${v.filter(x=>x==='T').length}\nTotal: ${alumnos.length}\n`;
   const a=document.createElement('a');
